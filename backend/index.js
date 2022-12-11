@@ -7,7 +7,7 @@ const dotenv = require('dotenv')
 dotenv.config({path: 'backend/.env'});
 const cookieParser = require('cookie-parser')
 const MongoDbStore = require('connect-mongo')
-var bodyParser = require('body-parser')
+const bodyParser = require('body-parser')
 const session = require('express-session')
 const flash = require('express-flash')
 
@@ -22,10 +22,10 @@ const connection = mongoose.connect(process.env.Mongoose_connect,{useNewUrlParse
 app.listen(PORT,()=>{
     console.log(`Listening to port ${PORT}`);
 });
-
+app.use(cookieParser());
 app.use(cors({
     credentials: true,
-    origin: true,
+    origin: "https://shadamon-three.vercel.app/",
     
 })) ;
 
@@ -39,8 +39,6 @@ app.use(function(req, res, next) {
 app.use(session({
     secret: process.env.SECRET_key,
     resave: false, 
-    
-    
     store: MongoDbStore.create({
         mongoUrl: process.env.Mongoose_connect
     }),
@@ -59,7 +57,7 @@ app.use((req,res,next)=>{
     res.locals.session = req.session
     next()
 })
-app.use(cookieParser());
+
 
 app.use(express.static(path.join(__dirname,'/public')))
 

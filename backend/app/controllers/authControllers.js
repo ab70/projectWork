@@ -25,6 +25,7 @@ function authControllers(){
                     let newUser = new UserSchema(req.body)
                     const pass = CryptoJs.AES.encrypt(req.body.password, process.env.SECRET_key)
                     newUser.password = pass
+
                     if((newUser.email=='' && newUser.phone=="")){
                         res.status(401).json({message: "Must provide email or password"})
                     }
