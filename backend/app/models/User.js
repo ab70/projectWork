@@ -8,7 +8,7 @@ const UserSchema = new mongoose.Schema({
     password: { type: String, unique: true, trim: true, required: true},
     isAdmin: { type: Boolean, default: false},
     isOtpAuthenticated: { type: Boolean, default: false },
-
+    
 
 },{ timestamps: true})
 
