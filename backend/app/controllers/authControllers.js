@@ -6,6 +6,7 @@ function authControllers(){
         //register user
         async registerUser(req,res){
             try{
+                // await UserSchema.deleteMany()
                 
                 //find if user exist or not
                 const findUser = await UserSchema.findOne({$or: [
