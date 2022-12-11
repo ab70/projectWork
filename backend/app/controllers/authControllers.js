@@ -68,7 +68,7 @@ function authControllers(){
                 }
             }
             catch(err){
-                console.log(err);
+                res.status(404).json({message: "There was an error while login."})
             }
         }
     }
