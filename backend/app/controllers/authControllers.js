@@ -7,7 +7,7 @@ function authControllers(){
         //register user
         async registerUser(req,res){
             try{
-                // await UserSchema.deleteMany()
+                //await UserSchema.deleteMany()
                 
                 //find if user exist or not
                 const findUser = await UserSchema.findOne({$or: [
@@ -25,6 +25,10 @@ function authControllers(){
                     let newUser = new UserSchema(req.body)
                     const pass = CryptoJs.AES.encrypt(req.body.password, process.env.SECRET_key)
                     newUser.password = pass
+                    if((newUser.email=='' && newUser.phone=="")){
+                        res.status(401).json({message: "Must provide email or password"})
+                    }
+                    else{
                     const saveNewUser = await newUser.save()
                     if(saveNewUser){
                         res.status(200).json({message: "Registration Successful !"})
@@ -32,6 +36,8 @@ function authControllers(){
                     else{
                         res.status(403).json({message: "Can't Register. Please try again."})
                     } 
+                    }
+                    
                   }
             }
             catch(err){
