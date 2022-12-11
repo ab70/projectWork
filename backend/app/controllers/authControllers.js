@@ -68,7 +68,7 @@ function authControllers(){
                     const token = jwt.sign({id: findUser._id, role: findUser.isAdmin},process.env.jsonSec)
                     console.log(token);
                     const {password,createdAt,updatedAt, ...others} = findUser._doc;
-                    // req.session.currentUser = others
+                    //req.session.currentUser = others
                     
                     res.cookie('jwt_token', token ,{ expires: new Date((new Date()).getTime() + (10 * 86400000)), httpOnly: true } )
                     console.log('cokkie set');
