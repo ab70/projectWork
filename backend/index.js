@@ -25,7 +25,7 @@ app.listen(PORT,()=>{
 app.use(cookieParser());
 app.use(cors({
     credentials: true,
-    origin: "https://shadamon-three.vercel.app/",
+    origin: true,
     
 })) ;
 
