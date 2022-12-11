@@ -8,7 +8,7 @@ function authControllers(){
             try{
                 
                 //find if user exist or not
-                const findUser = await UserSchema.find({$or: [
+                const findUser = await UserSchema.findOne({$or: [
                     {
                       email: req.body.email
                     },
@@ -16,7 +16,7 @@ function authControllers(){
                       phone: req.body.phone
                     }
                   ]})
-                  if(!findUser){
+                  if(findUser){
                     res.status(403).json({message: "User Already Exist!"})
                   }
                   else{
@@ -34,7 +34,7 @@ function authControllers(){
             }
             catch(err){
                 console.log(err);
-                res.status(404).json({message: "Please try to Register again"})
+                res.status(404).json({message: "User Already Exist! Try to login again"})
 
             }
 
