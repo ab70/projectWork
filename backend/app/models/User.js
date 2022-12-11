@@ -2,10 +2,10 @@ const mongoose = require('mongoose')
 
 const UserSchema = new mongoose.Schema({
     name: {type: String, trim: true},
-    email: { type: String, unique: true, trim: true, lowercase: true},
-    phone: {type: String, unique: true, trim: true, minleangth: 11, maxlength: 11},
+    email: { type: String, unique: true, required: false, trim: true, default: ''},
+    phone: {type: String, trim: true, required: false , default: ''},
     address: { type: String, trim: true },
-    password: { type: String, unique: true, trim: true, required: true},
+    password: { type: String, trim: true, required: true},
     isAdmin: { type: Boolean, default: false},
     isOtpAuthenticated: { type: Boolean, default: false },
     

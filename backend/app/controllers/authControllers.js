@@ -1,14 +1,14 @@
-
+const CryptoJs = require('crypto-js')
 const UserSchema = require('../models/User')
 
 function authControllers(){
     return {
         //register user
         async registerUser(req,res){
-            console.log(req.body);
-            const newUser = new UserSchema(req.body)
-            console.log(newUser);
             try{
+                let newUser = new UserSchema(req.body)
+                const pass = CryptoJs.AES.encrypt(req.body.password, process.env.SECRET_key)
+                newUser.password = pass
                 //find if user exist or not
                 const findUser = await UserSchema.find({$or: [
                     {
@@ -24,7 +24,7 @@ function authControllers(){
                   else{
                     const saveNewUser = await newUser.save()
                     if(saveNewUser){
-                        res.status(200).json({message: "Registered Successful!"})
+                        res.status(200).json({message: "Registration Successful !"})
                     }
                     else{
                         res.status(403).json({message: "Can't Register. Please try again."})
@@ -32,7 +32,8 @@ function authControllers(){
                   }
             }
             catch(err){
-                res.status(404).json({message: "Please Try again Server Error"})
+                console.log(err);
+                res.status(404).json({message: err})
 
             }
 
