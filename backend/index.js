@@ -13,7 +13,7 @@ const flash = require('express-flash')
 
 const app = express();
 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 3000;
 mongoose.set('strictQuery', true);
 const connection = mongoose.connect(process.env.Mongoose_connect,{useNewUrlParser: true, useUnifiedTopology: true}).then((response)=>{
     console.log('MongoDb connected');

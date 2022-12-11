@@ -9,6 +9,7 @@ function authControllers(){
             try{
                 //find if user exist or not
                 
+                res.status(201).json({message: "got data"})
                 
             }
             catch(err){
