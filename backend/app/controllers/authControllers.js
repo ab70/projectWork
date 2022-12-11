@@ -6,9 +6,7 @@ function authControllers(){
         //register user
         async registerUser(req,res){
             try{
-                let newUser = new UserSchema(req.body)
-                const pass = CryptoJs.AES.encrypt(req.body.password, process.env.SECRET_key)
-                newUser.password = pass
+                
                 //find if user exist or not
                 const findUser = await UserSchema.find({$or: [
                     {
@@ -22,6 +20,9 @@ function authControllers(){
                     res.status(403).json({message: "User Already Exist!"})
                   }
                   else{
+                    let newUser = new UserSchema(req.body)
+                    const pass = CryptoJs.AES.encrypt(req.body.password, process.env.SECRET_key)
+                    newUser.password = pass
                     const saveNewUser = await newUser.save()
                     if(saveNewUser){
                         res.status(200).json({message: "Registration Successful !"})
@@ -33,7 +34,7 @@ function authControllers(){
             }
             catch(err){
                 console.log(err);
-                res.status(404).json({message: err})
+                res.status(404).json({message: "Please try to Register again"})
 
             }
 
