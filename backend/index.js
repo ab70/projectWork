@@ -35,17 +35,17 @@ app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });  
-//session create in mongodb 
-app.use(session({
-    secret: process.env.SECRET_key,
-    resave: false, 
-    store: MongoDbStore.create({
-        mongoUrl: process.env.Mongoose_connect
-    }),
-    saveUninitialized: false, //here it will not initialize unless anything is passed inside session
-    cookie: {maxAge: 1000*60*60*6} //6 hour
+// session create in mongodb 
+// app.use(session({
+//     secret: process.env.SECRET_key,
+//     resave: false, 
+//     store: MongoDbStore.create({
+//         mongoUrl: process.env.Mongoose_connect
+//     }),
+//     saveUninitialized: false, //here it will not initialize unless anything is passed inside session
+//     cookie: {maxAge: 1000*60*60*6} //6 hour
 
-}))
+// }))
 
 
 //app middlewares

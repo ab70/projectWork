@@ -69,8 +69,10 @@ function authControllers(){
                     console.log(token);
                     const {password,createdAt,updatedAt, ...others} = findUser._doc;
                     req.session.currentUser = others
-                    res.cookie('jwt_token', token,{ expires: new Date((new Date()).getTime() + (10 * 86400000)), httpOnly: true } )
-                    res.status(200).json({message: "user logged in Successfully", data: others})
+                    
+                    res.cookie('jwt_token', token ,{ expires: new Date((new Date()).getTime() + (10 * 86400000)), httpOnly: true } )
+                    console.log('cokkie set');
+                    res.status(200).json({message:"User logedin", data: others});
                    }
                 }
             }
