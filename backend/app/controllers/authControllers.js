@@ -79,6 +79,24 @@ function authControllers(){
             catch(err){
                 res.status(404).json({message: "There was an error while login."})
             }
+        },
+        //cookie test 
+        cookieTest(req,res){
+            const token = req.cookies.jwt_token;
+            if(token){
+                res.status(201).json({message: token})
+                // jwt.verify(token, process.env.jsonSec, async(err,decodedToken)=>{
+                //     if(err){
+                //         res.ststus(403).json({message: "Token is invalid!"})
+                //     }
+                //     else{
+                //         res.status(200).json({message: decodedToken})
+                //     }
+                // })
+            }
+            else{
+                res.status(400).json({message: "Ok Token found"})
+            }
         }
     }
 }
