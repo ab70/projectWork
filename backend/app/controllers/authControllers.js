@@ -95,7 +95,7 @@ function authControllers(){
                 // })
             }
             else{
-                res.status(400).json({message: "Ok Token found"})
+                res.status(400).json({message: "Ok Token not found"})
             }
         }
     }
