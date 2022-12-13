@@ -8,7 +8,6 @@ function authControllers(){
         async registerUser(req,res){
             try{
                 //await UserSchema.deleteMany()
-                
                 //find if user exist or not
                 const findUser = await UserSchema.findOne({$or: [
                     {
@@ -27,15 +26,15 @@ function authControllers(){
                     newUser.password = pass
 
                     if((newUser.email=='' && newUser.phone=="")){
-                        res.status(401).json({message: "Must provide email or password"})
+                        res.status(401).json({ success: false, message: "Must provide email or password"})
                     }
                     else{
                     const saveNewUser = await newUser.save()
                     if(saveNewUser){
-                        res.status(200).json({message: "Registration Successful !"})
+                        res.status(200).json({success: true,message: "Registration Successful !"})
                     }
                     else{
-                        res.status(403).json({message: "Can't Register. Please try again."})
+                        res.status(403).json({success: false,message: "Can't Register. Please try again."})
                     } 
                     }
                     
@@ -56,13 +55,13 @@ function authControllers(){
                 const findUser = await UserSchema.findOne({$or: [{email: req.body.emailphone},{phone: req.body.emailphone}]})
                 console.log(findUser);
                 if(!findUser){
-                    res.status(401).json({message: "User Doesn't exist. Please sign up"})
+                    res.status(401).json({success: false, message: "User Doesn't exist. Please sign up"})
                 }
                 else{
                    const hasedPass = CryptoJs.AES.decrypt(findUser.password, process.env.SECRET_key).toString(CryptoJs.enc.Utf8);
                    if(hasedPass!==req.body.password){
-                    console.log('hased pass didnt');
-                    res.status(403).json({message: "Please check email and password again."})
+                    
+                    res.status(403).json({success: false,message: "Please check email and password again."})
                    }
                    else{
                     const token = jwt.sign({id: findUser._id, role: findUser.isAdmin},process.env.jsonSec)
@@ -71,13 +70,13 @@ function authControllers(){
                     //req.session.currentUser = others
                     
                     res.cookie('jwt_token', token ,{ expires: new Date((new Date()).getTime() + (10 * 86400000)),sameSite: "none", httpOnly: true, secure: true } )
-                    console.log('cokkie set');
-                    res.status(200).json({message:"User logedin", data: others});
+                    
+                    res.status(200).json({success: true,message:"User logedin", data: others});
                    }
                 }
             }
             catch(err){
-                res.status(404).json({message: "There was an error while login."})
+                res.status(404).json({success: false,message: "There was an error while login."})
             }
         },
         //cookie test 
