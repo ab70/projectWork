@@ -57,6 +57,20 @@ function adminControllers(){
             catch(err){
                 res.status(404).json({success: false, message: "Error while fetching Users"})
             }
+        },
+        async getAusersData(req,res){
+            try{
+                const findUser = await UserSchema.findById({_id: req.params.id},{ "password": 0})
+                if(findUser){
+                    res.status(200).json({success: true, message: "Users Data found", data: findUser})
+                }else{
+                    res.status(404).json({success: false, message: "Error while fetching Users"})
+                }
+                
+            }
+            catch(err){
+                res.status(404).json({success: false, message: "Error while fetching Users"})
+            }
         }
     }
 }
