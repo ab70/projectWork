@@ -7,9 +7,8 @@ const UserSchema = new mongoose.Schema({
     address: { type: String, trim: true },
     password: { type: String, trim: true, required: true},
     isAdmin: { type: Boolean, default: false},
-    isOtpAuthenticated: { type: Boolean, default: false },
+    isOtpAuthenticated: { type: Boolean, default: false },   
     
-
 },{ timestamps: true})
 
 module.exports = mongoose.model("User", UserSchema)
