@@ -11,6 +11,7 @@ router.get('/getuser/:id', adminControllers().getAusersData)
 //feature
 router.post('/createfeature', adminControllers().createFeature)
 router.get('/allfeatures', adminControllers().getAllFeatures)
+router.post('/editfeature', adminControllers().editFeature)
 
 
 module.exports = router
