@@ -1,4 +1,5 @@
 const ParentCategorySchema = require('../models/ParentCategory')
+const CategorySchema = require('../models/Category')
 const FeatureSchema = require('../models/Feature')
 const UserSchema = require('../models/User')
 
@@ -112,7 +113,6 @@ function adminControllers(){
                 const id = req.body.id
                 let bodyData = req.body //here to set new object that will be placed in db obj
                 delete bodyData.id
-                console.log(bodyData);
 
                 const editedData = await FeatureSchema.findOneAndUpdate({"_id": id}, bodyData, function(err,result){
                     if(err){
@@ -129,6 +129,45 @@ function adminControllers(){
                 res.status(404).json({success: true, message: "Failed to Edit feature", })
             }
            
+        },
+        //ADD NEW CATEGORY
+        async addCategory(req,res){
+            try{
+                const newCat = new CategorySchema(req.body)
+
+                // res.status(200).json({success: true, message: "Category added", data : newCat})
+                const saveCat = await newCat.save()
+                if(saveCat){
+                    const getAllCat = await CategorySchema.find({}).populate('features')
+                    res.status(200).json({success: true, message: "Category added", data: getAllCat})
+                }
+                else{
+                    res.status(401).json({success: false, message: "Couldn't add category"})
+                } 
+            }
+            catch(err){
+                res.status(404).json({success: false, message: err})
+            }
+        },
+        //edit category
+        async editCategory(req,res){
+            try{
+                const id = req.body.id
+                let editBody = req.body
+                delete editBody.id
+                console.log(editBody);
+                const editedCat = await CategorySchema.findOneAndUpdate({"_id": id}, editBody)
+                if(editedCat){
+                    res.status(200).json({ succeess: true, message: "Category edit successful"})
+                }
+                else{
+                    res.status(401).json({ succeess: false, message: "Category edit failed"})
+                }
+            }
+            catch(errr){
+                res.status(404).json({ succeess: false, message: errr})
+
+            }
         }
 
     }

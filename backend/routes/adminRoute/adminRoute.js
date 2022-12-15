@@ -13,5 +13,9 @@ router.post('/createfeature', adminControllers().createFeature)
 router.get('/allfeatures', adminControllers().getAllFeatures)
 router.post('/editfeature', adminControllers().editFeature)
 
+//category
+router.post('/addcategory', adminControllers().addCategory)
+router.post('/editcategory', adminControllers().editCategory)
+
 
 module.exports = router
