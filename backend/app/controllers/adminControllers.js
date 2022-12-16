@@ -130,23 +130,21 @@ function adminControllers(){
         //edit feature
         async editFeature(req,res){
             try{
-                const id = req.body.id
+                let id = req.body.id
                 let bodyData = req.body //here to set new object that will be placed in db obj
                 delete bodyData.id
 
-                const editedData = await FeatureSchema.findOneAndUpdate({"_id": id}, bodyData, function(err,result){
-                    if(err){
+                const editedData = await FeatureSchema.findOneAndUpdate({"_id": id}, bodyData)
+                    if(!editedData){
                         res.status(401).json({success: false, message: "Can't Edit feature" })
                     }
                     else{
-                        res.status(200).json({success: true, message: " Edit feature Done"})
+                        res.status(200).json({success: true, message: "Edit feature Done"})
                     }
-                  
-                })
-
+   
             }
             catch(err){
-                res.status(404).json({success: true, message: "Failed to Edit feature", })
+                res.status(404).json({success: false, message: err, })
             }
            
         },
