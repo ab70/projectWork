@@ -1,5 +1,6 @@
 const ParentCategorySchema = require('../models/ParentCategory')
 const CategorySchema = require('../models/Category')
+const SubcategorySchema = require('../models/Subcategory')
 const FeatureSchema = require('../models/Feature')
 const UserSchema = require('../models/User')
 
@@ -61,6 +62,25 @@ function adminControllers(){
                 res.status(404).json({success: false, message: "Error while fetching Users"})
             }
         },
+        //getLoggedIn users info
+        async getLoggedInUser(req,res){
+            try{
+                const id = req.userid
+                console.log(id);
+                const userInfo = await UserSchema.findById({_id: id},{"password":0})
+                console.log(userInfo);
+                if(userInfo){
+                    res.status(200).json({success: true, message: "Users Data found", data: userInfo})
+                }
+                else{
+                    res.status(401).json({success: false, message: "Users not  found"})
+                }
+            }
+            catch(err){
+                res.status(404).json({success: false, message: "Users not  found"})
+            }
+        },
+        //get a userinfo by click
         async getAusersData(req,res){
             try{
                 const findUser = await UserSchema.findById({_id: req.params.id},{ "password": 0})
@@ -138,8 +158,8 @@ function adminControllers(){
                 // res.status(200).json({success: true, message: "Category added", data : newCat})
                 const saveCat = await newCat.save()
                 if(saveCat){
-                    const getAllCat = await CategorySchema.find({}).populate('features')
-                    res.status(200).json({success: true, message: "Category added", data: getAllCat})
+                    
+                    res.status(200).json({success: true, message: "Category added", })
                 }
                 else{
                     res.status(401).json({success: false, message: "Couldn't add category"})
@@ -167,6 +187,22 @@ function adminControllers(){
             catch(errr){
                 res.status(404).json({ succeess: false, message: errr})
 
+            }
+        },
+        //add subcategory with feature
+        async addSubcategory(req,res){
+            try{
+                const newSubcat = new SubcategorySchema(req.body)
+                const saveSubcat = await newSubcat.save()
+                if(saveSubcat){
+                    res.status(200).json({success: true, message: "Saved sub category with feature"})
+                }
+                else{
+                    res.status(404).json({success: false, message: "Saved sub category with feature"})
+                }
+            }
+            catch(err){
+                res.status(404).json({success: false, message: err})
             }
         }
 
