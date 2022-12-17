@@ -1,5 +1,6 @@
 const express =require('express')
 const router = express.Router()
+const uploads = require('../../app/middlewares/uploads')
 const {auth} = require('../../app/middlewares/authMiddlewares')
 const adminControllers = require('../../app/controllers/adminControllers')
 
@@ -16,12 +17,13 @@ router.post('/createfeature', adminControllers().createFeature)
 router.get('/allfeatures', adminControllers().getAllFeatures)
 router.post('/editfeature', adminControllers().editFeature)
 
-//category
-router.post('/addcategory', adminControllers().addCategory)
+//categorys
+router.get('/getallcategory', adminControllers().getAllCategory)
+router.post('/addcategory', uploads.single('categoryImg'), adminControllers().addCategory)
 router.post('/editcategory', adminControllers().editCategory)
 
 //subcategory with feature select
-
+router.post('/addsubcategory', adminControllers().addSubcategory)
 
 
 module.exports = router
