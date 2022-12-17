@@ -61,7 +61,7 @@ app.use((req,res,next)=>{
 })
 
 
-app.use(express.static(path.join(__dirname,'backend/public')))
+app.use(express.static(path.join(__dirname,'public')))
 
 //required api.js file and passed app to there
 require('./routes/api')(app)
