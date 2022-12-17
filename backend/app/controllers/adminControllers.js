@@ -151,23 +151,32 @@ function adminControllers(){
         //ADD NEW CATEGORY
         async addCategory(req,res){
             try{
-                const newCat = new CategorySchema({
-                    parentId: req.body.parentId,
-                    categoryName: req.body.categoryName,
-                    categoryOrder: req.body.categoryOrder,
-                    categoryImg: req.file.filename,
-                    categoryImgPath: req.file.path 
-                })
-
-                // res.status(200).json({success: true, message: "Category added", data : newCat})
-                const saveCat = await newCat.save()
-                if(saveCat){
-                    
-                    res.status(200).json({success: true, message: "Category added", })
+                const checkCategory = await CategorySchema.find({$and:[{parentId:req.body.parentId},{categoryName: req.body.categoryName}]})
+                if(checkCategory.length>0){
+                    res.status(401).json({success: false, message: "Category under a parent cant be twice"})
                 }
                 else{
-                    res.status(401).json({success: false, message: "Couldn't add category"})
-                } 
+                    const newCat = new CategorySchema({
+                        parentId: req.body.parentId,
+                        categoryName: req.body.categoryName,
+                        categoryOrder: req.body.categoryOrder,
+                        categoryImg: req.file.filename,
+                        categoryImgPath: req.file.path 
+                    })
+                    
+    
+                    // res.status(200).json({success: true, message: "Category added", data : newCat})
+                    const saveCat = await newCat.save()
+                    if(saveCat){
+                        
+                        res.status(200).json({success: true, message: "Category added", })
+                    }
+                    else{
+                        res.status(401).json({success: false, message: "Couldn't add category"})
+                    } 
+                    
+                }
+               
             }
             catch(err){
                 res.status(404).json({success: false, message: err})
