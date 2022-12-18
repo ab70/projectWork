@@ -217,6 +217,7 @@ function adminControllers(){
         //add subcategory with feature
         async addSubcategory(req,res){
             try{
+                //await SubcategorySchema.deleteMany()
                 const newSubcat = new SubcategorySchema(req.body)
                 const saveSubcat = await newSubcat.save()
                 if(saveSubcat){
