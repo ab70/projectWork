@@ -199,7 +199,7 @@ function adminControllers(){
                 const id = req.body.id
                 let editBody = req.body
                 delete editBody.id
-                console.log(editBody);
+                
                 const editedCat = await CategorySchema.findOneAndUpdate({"_id": id}, editBody)
                 if(editedCat){
                     res.status(200).json({ succeess: true, message: "Category edit successful"})
@@ -229,6 +229,39 @@ function adminControllers(){
                 res.status(404).json({success: false, message: err})
             }
         },
+        //get all sub categories
+        async getAllSubCategories(req,res){
+            try{
+                const result = await SubcategorySchema.find({}).populate('categoryId')
+                if(result){
+                    res.status(200).json({success: true, message: "Fetch done", data: result})
+                }
+                else{
+                    res.status(401).json({success: false, message: "Failed to Fetch", data: result})
+                }
+            }
+            catch(err){
+                res.status(404).json({success: false, message: "Failed to Fetch", data: result})
+            }
+        },
+        //Edit sub categories
+        async editSubCategory(req,res){
+            try{
+                const id = req.body.id
+                let editBody = req.body
+                delete editBody.id
+                const editedCat = await CategorySchema.findOneAndUpdate({"_id": id}, editBody)
+                if(editedCat){
+                    res.status(200).json({ succeess: true, message: "Category edit successful"})
+                }
+                else{
+                    res.status(401).json({ succeess: false, message: "Category edit failed"})
+                }
+            }
+            catch(err){
+                res.status(404).json({ succeess: false, message: "Category edit failed"})
+            }
+        }
         
 
     }

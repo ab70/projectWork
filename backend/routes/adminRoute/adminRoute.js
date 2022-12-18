@@ -24,6 +24,7 @@ router.post('/editcategory', adminControllers().editCategory)
 
 //subcategory with feature select
 router.post('/addsubcategory', adminControllers().addSubcategory)
+router.get('/allsubcategory', adminControllers().getAllSubCategories)
 
 
 module.exports = router
