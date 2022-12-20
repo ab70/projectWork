@@ -153,6 +153,8 @@ function adminControllers(){
         //ADD NEW CATEGORY
         async addCategory(req,res){
             try{
+                console.log(req.body);
+                console.log(req.file.filename);
                 const checkCategory = await CategorySchema.find({$and:[{parentId:req.body.parentId},{categoryName: req.body.categoryName}]})
                 if(checkCategory.length>0){
                     res.status(401).json({success: false, message: "Category under a parent cant be twice"})
