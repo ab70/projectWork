@@ -21,10 +21,12 @@ router.post('/editfeature', adminControllers().editFeature)
 router.get('/getallcategory', adminControllers().getAllCategory)
 router.post('/addcategory', uploads.single('categoryImg'), adminControllers().addCategory)
 router.post('/editcategory', adminControllers().editCategory)
+router.get('/getcatofparent/:id', adminControllers().getCategoryOfParent)
 
 //subcategory with feature select
 router.post('/addsubcategory', adminControllers().addSubcategory)
 router.get('/allsubcategory', adminControllers().getAllSubCategories)
+router.get('/getsubcatofcat/:id', adminControllers().getSubcategoryOfCategory)
 
 
 module.exports = router

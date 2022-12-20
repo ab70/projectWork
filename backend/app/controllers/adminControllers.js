@@ -263,6 +263,27 @@ function adminControllers(){
             catch(err){
                 res.status(404).json({ succeess: false, message: "Category edit failed"})
             }
+        },
+        //GET category of a parent
+        async getCategoryOfParent(req,res){
+            try{
+                const allCat = await CategorySchema.find({"parentId":req.params.id})
+                res.status(200).json({succeess: true, message: "Data fetch done", data: allCat})
+            }
+            catch(err){
+                res.status(404).json({succeess: false, message: "Data fetch done",})
+            }
+        },
+        //get all subcategory under a category
+        async getSubcategoryOfCategory(req,res){
+            try{
+                const allSub = await SubcategorySchema.find({categoryId: req.params.id})
+                if(allSub){res.status(200).json({succeess: true, message: "Data fetch done",data: allSub})}
+                else{res.status(401).json({succeess: false, message: "Data fetch fail"})}
+            }
+            catch(err){
+                res.status(404).json({succeess: false, message: "Data fetch fail"})
+            }
         }
         
 
