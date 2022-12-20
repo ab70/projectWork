@@ -1,4 +1,6 @@
 const ProductSchema = require('../models/Product')
+const UserSchema = require('../models/User')
+
 function productControllers(){
     return{
         //Add new product 
@@ -36,6 +38,19 @@ function productControllers(){
             }
             catch(err){
                 res.status(200).json({success: false, message: err,})
+            }
+        },
+        //get userId for product
+        async getAlUser(req,res){
+            try{
+                const findUser = await UserSchema.findOne({$or: [{email: req.params.emailphone},{phone: req.params.emailphone}]},{"name":1})
+                findUser ? res.status(200).json({success:true, message: "found user", data: findUser})
+                :
+                res.status(401).json({success:false, message: "user not found"})
+
+            }
+            catch(err){
+                res.status(404).json({success:false, message: "user not found"})
             }
         }
     }
