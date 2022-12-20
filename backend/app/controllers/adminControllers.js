@@ -127,6 +127,8 @@ function adminControllers(){
                 res.status(404).json({success: false, message: "Feature could not fetch" })
             }
         },
+        
+
         //edit feature
         async editFeature(req,res){
             try{
@@ -277,14 +279,15 @@ function adminControllers(){
         //get all subcategory under a category
         async getSubcategoryOfCategory(req,res){
             try{
-                const allSub = await SubcategorySchema.find({categoryId: req.params.id})
+                const allSub = await SubcategorySchema.find({categoryId: req.params.id}).populate('features')
                 if(allSub){res.status(200).json({succeess: true, message: "Data fetch done",data: allSub})}
                 else{res.status(401).json({succeess: false, message: "Data fetch fail"})}
             }
             catch(err){
                 res.status(404).json({succeess: false, message: "Data fetch fail"})
             }
-        }
+        },
+        
         
 
     }
