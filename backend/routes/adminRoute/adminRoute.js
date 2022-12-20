@@ -27,6 +27,7 @@ router.get('/getcatofparent/:id', adminControllers().getCategoryOfParent)
 router.post('/addsubcategory', adminControllers().addSubcategory)
 router.get('/allsubcategory', adminControllers().getAllSubCategories)
 router.get('/getsubcatofcat/:id', adminControllers().getSubcategoryOfCategory)
+router.get('/getfeaturesofsubcat/:id', adminControllers().getFeatureOfSubcategory)
 
 
 module.exports = router

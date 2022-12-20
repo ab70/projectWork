@@ -287,6 +287,16 @@ function adminControllers(){
                 res.status(404).json({succeess: false, message: "Data fetch fail"})
             }
         },
+        //get all feature of a sub category
+        async getFeatureOfSubcategory(req,res){
+            try{
+            const features = await SubcategorySchema.find({"_id": req.params.id}).populate('features')
+            features ? res.status(200).json({success:true, message:" Feature of this sub cat found", data: features}) : res.status(200).json({success:false, message:" Feature of this sub cat found"})
+            }
+            catch(err){
+                res.status(404).json({success:false, message:" Feature of this sub cat found",})
+            }
+        }
         
         
 
