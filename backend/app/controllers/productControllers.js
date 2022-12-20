@@ -12,15 +12,15 @@ function productControllers(){
                 });
                 const postproduct = await databody.save()
                 if(postproduct){
-                    res.status(200).json({success: true, message: "Product Saved",})
+                    res.status(200).json({success: true, message: "Product Saved", data: databody})
                 }
                 else{
-                    res.status(401).json({success: false, message: "Product couldn't save",})
+                    res.status(401).json({success: false, message: "Product couldn't save", data:databody})
                 }
       
             }
             catch(err){
-                res.status(401).json({success: false, message: err})
+                res.status(404).json({success: false, message: err, data: databody})
             }
         },
         //get all product
