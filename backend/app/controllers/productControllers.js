@@ -6,7 +6,7 @@ function productControllers(){
         //Add new product 
         async addNewProduct(req,res){
             try{
-                await ProductSchema.deleteMany()
+                // await ProductSchema.deleteMany()
                 let databody = new ProductSchema(req.body)
                 
                 req.files.forEach(e => {
