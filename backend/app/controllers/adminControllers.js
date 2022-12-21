@@ -3,6 +3,7 @@ const CategorySchema = require('../models/Category')
 const SubcategorySchema = require('../models/Subcategory')
 const FeatureSchema = require('../models/Feature')
 const UserSchema = require('../models/User')
+const LocationSchema  = require('../models/Location')
 
 
 function adminControllers(){
@@ -15,6 +16,16 @@ function adminControllers(){
             }
             catch(err){
                 res.status(400).json({message: "Please try again"})
+            }
+        },
+        async location(req,res){
+            try{
+                const saved = await LocationSchema.find({})
+                saved ? res.status(200).json({succeess: true, message: "Locations found", data: saved})
+                : res.status(401).json({succeess: false, message: "Locations could not found"})
+            }
+            catch(err){
+              res.status(404).json({succeess: false, message: err})
             }
         },
         //add parent category

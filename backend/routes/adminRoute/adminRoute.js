@@ -4,7 +4,7 @@ const uploads = require('../../app/middlewares/uploads')
 const {auth} = require('../../app/middlewares/authMiddlewares')
 const adminControllers = require('../../app/controllers/adminControllers')
 
-//
+
 
 router.post('/addparent', adminControllers().addParentCategory)
 router.get('/allparentcat', adminControllers().getAllParentCategory)

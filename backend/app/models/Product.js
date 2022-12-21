@@ -6,7 +6,8 @@ const ProductSchema = new mongoose.Schema({
     heading: { type: String, required: true, trim: true},
     description: { type: String, trim: true },
     categoryId: {type: mongoose.Schema.Types.ObjectId, ref:'Category', required: true},
-    address: { type: String, trim: true, required: true, default: '' },
+    location:{type: mongoose.Schema.Types.ObjectId, ref:'Location', required: true},
+    address: { type: String, trim: true,  default: '' },
     productStatus: { type: String, default: '' },
     slotStatus: {type:String,trim:true, default:''},
     notificationDialogue: {type:String, trim: true, default:''},
@@ -32,7 +33,7 @@ const ProductSchema = new mongoose.Schema({
         click: {type:Number, default:0},
     },
     videoLink: { type: String, trim:true, default:''},
-    publishedAt:{type: Date, default: moment().format('YYYY-MM-DD') },
+    publishedAt:{type: Date, default: '' },
     features:[
         {
             feature:{type: mongoose.Schema.Types.ObjectId, ref:'Feature', required: true},
