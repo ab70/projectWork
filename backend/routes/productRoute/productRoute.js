@@ -12,4 +12,8 @@ router.get('/product/:emailphone' , productControllers().getAlUser)
 //location
 router.get('/location', adminControllers().location)
 
+//product img 
+router.post('/approvephoto', productControllers().productImgApprove)
+
+
 module.exports = router

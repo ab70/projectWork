@@ -7,6 +7,8 @@ function productControllers(){
         async addNewProduct(req,res){
             try{
                 // await ProductSchema.deleteMany()
+                console.log(req.body);
+                
                 let databody = new ProductSchema(req.body)
                 
                 req.files.forEach(e => {
@@ -51,6 +53,18 @@ function productControllers(){
             }
             catch(err){
                 res.status(404).json({success:false, message: "user not found"})
+            }
+        },
+        //approve picture of product img
+        async productImgApprove(req,res){
+            try{
+                let findObj = await ProductSchema.update({"productImg._id": req.body.id},{"$set":{"productImg.$.approved":req.body.approved}})
+                findObj ? res.status(200).json({ success:true, message:"found", data: findObj})
+                :
+                res.status(401).json({ success:false, message:"not found", data: findObj})
+            }
+            catch(err){
+                res.status(404).json({ success:false, message:"found", data: findObj})
             }
         }
     }
