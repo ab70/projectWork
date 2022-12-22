@@ -8,12 +8,13 @@ function productControllers(){
             try{
                 // await ProductSchema.deleteMany()
                 console.log(req.body);
-                
+                console.log(req.files[0].filename);
                 let databody = new ProductSchema(req.body)
                 
                 req.files.forEach(e => {
                     databody.productImg.push({img: e.filename})
                 });
+                console.log(databody);
                 const postproduct = await databody.save()
                 if(postproduct){
                     res.status(200).json({success: true, message: "Product Saved", data: databody})
