@@ -8,7 +8,12 @@ function productControllers(){
             try{
                 // await ProductSchema.deleteMany()
                 console.log(req.body);
-                console.log(req.files[0].filename);
+                if(!req.files){
+                    console.log("Files not found");
+                }
+                else{
+                    console.log("Files found");
+                }
                 let databody = new ProductSchema(req.body)
                 
                 req.files.forEach(e => {
