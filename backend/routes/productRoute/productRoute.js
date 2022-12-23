@@ -5,7 +5,7 @@ const productControllers = require('../../app/controllers/productControllers')
 const adminControllers = require('../../app/controllers/adminControllers')
 
 // Add product
-router.post('/addproduct',uploads.array('productImg[][img]',5), productControllers().addNewProduct)
+router.post('/addproduct',uploads.any(), productControllers().addNewProduct)
 router.get('/products', productControllers().getAllProduct)
 router.get('/product/:emailphone' , productControllers().getAlUser)
 
