@@ -12,7 +12,7 @@ const ProductSchema = new mongoose.Schema({
     productStatus: { type: String, default: '' },
     slotStatus: {type:String,trim:true, default:''},
     notificationDialogue: {type:String, trim: true, default:''},
-    productImg :[ {img: {type: String, trim:true}, approved:{type: String, trim:true,default:'false'}, longImg:{type: String, trim:true, default: 'false' }}],
+    productImgs :[ {img: {type: String, trim:true}, approved:{type: String, trim:true,default:'false'}, longImg:{type: String, trim:true, default: 'false' }}],
     quantity: {type: Number, default: 0, },
     payablePrice: {type: Number, default: 0},
     oldPrice:{ type: Number, default:0 },

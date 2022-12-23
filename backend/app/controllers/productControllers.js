@@ -16,8 +16,9 @@ function productControllers(){
                 }
                 let databody = new ProductSchema(req.body)
                 databody.userId = '6398732316bd7468e63fa39a'
+                let i = 0
                 req.files.forEach(e => {
-                    databody.productImg.push({img: e.filename})
+                    databody.productImgs.push({img: e.filename,})
                 });
                 console.log(databody);
                 const postproduct = await databody.save()
