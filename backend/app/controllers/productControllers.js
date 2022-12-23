@@ -15,7 +15,7 @@ function productControllers(){
                     console.log("Files found");
                 }
                 let databody = new ProductSchema(req.body)
-                
+                databody.userId = '6398732316bd7468e63fa39a'
                 req.files.forEach(e => {
                     databody.productImg.push({img: e.filename})
                 });
