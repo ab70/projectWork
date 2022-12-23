@@ -25,12 +25,13 @@ function productControllers(){
                     res.status(200).json({success: true, message: "Product Saved", data: databody})
                 }
                 else{
-                    res.status(401).json({success: false, message: "Product couldn't save", data:databody})
+                    res.status(401).json({success: false, message: "Product couldn't save",})
                 }
       
             }
             catch(err){
-                res.status(404).json({success: false, message: err, data: databody})
+                console.log(err);
+                res.status(404).json({success: false, message: err,})
             }
         },
         //get all product
