@@ -1,5 +1,6 @@
 const ProductSchema = require('../models/Product')
 const UserSchema = require('../models/User')
+const SubLocationSchem = require('../models/SubLocation')
 
 function productControllers(){
     return{
@@ -130,6 +131,19 @@ function productControllers(){
             }
             catch(err){
                 res.status(404).json({success:false, message: "Data update failed"})
+            }
+        },
+        //Post sub location
+        async addSublocation(req,res){
+            try{
+                const newSub = new SubLocationSchem(req.body)
+                const saveSub = await newSub.save()
+                saveSub ? res.status(200).json({success: true, message: "Sved"})
+                :
+                res.status(401).json({success: false, message: "Could not Sved"})
+            }
+            catch(err){
+                res.status(404).json({success: false, message: "Could not save"})
             }
         }
     }

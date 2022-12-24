@@ -8,20 +8,21 @@ const adminControllers = require('../../app/controllers/adminControllers')
 router.post('/addproduct',uploads.any(), productControllers().addNewProduct)
 router.get('/products', productControllers().getAllProduct)
 router.get('/product/:emailphone' , productControllers().getAlUser)
+//get product
+router.get('/products/:id', productControllers().getAProduct)
 
-//location
-router.get('/location', adminControllers().location)
+
 
 //product img 
 router.post('/approvephoto', productControllers().productImgApprove)
 router.post('/productimgdelete', productControllers().deletePhoto)
 
-//get product
-router.get('/products/:id', productControllers().getAProduct)
-
 //update product
 router.post('/updateproduct', uploads.any(), productControllers().editproduct)
 
+//location
+router.get('/location', adminControllers().location)
+router.post('/postsublocation', productControllers().addSublocation)
 
 
 module.exports = router
