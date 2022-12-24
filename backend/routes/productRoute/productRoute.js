@@ -14,6 +14,14 @@ router.get('/location', adminControllers().location)
 
 //product img 
 router.post('/approvephoto', productControllers().productImgApprove)
+router.post('/productimgdelete', productControllers().deletePhoto)
+
+//get product
+router.get('/products/:id', productControllers().getAProduct)
+
+//update product
+router.post('/updateproduct', uploads.any(), productControllers().editproduct)
+
 
 
 module.exports = router
