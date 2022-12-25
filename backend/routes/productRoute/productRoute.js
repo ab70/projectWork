@@ -22,6 +22,9 @@ router.post('/updateproduct', uploads.any(), productControllers().editproduct)
 
 //location
 router.get('/location', adminControllers().location)
+router.post('/location', productControllers().addLocation)
+router.post('/editlocation', productControllers().editLocation)
+router.delete('/deletelocation/:id',productControllers().deleteLocation)
 
 router.post('/postsublocation', productControllers().addSublocation)
 router.get('/getasublocation/:id', productControllers().getAsublocation)

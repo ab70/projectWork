@@ -1,5 +1,6 @@
 const ProductSchema = require('../models/Product')
 const UserSchema = require('../models/User')
+const LocationSchema = require('../models/Location')
 const SubLocationSchem = require('../models/SubLocation')
 
 function productControllers(){
@@ -133,6 +134,48 @@ function productControllers(){
                 res.status(404).json({success:false, message: "Data update failed"})
             }
         },
+        //add location
+        async addLocation(req,res){
+            try{
+
+                const location = new LocationSchema(req.body)
+                const saveLocation = await location.save()
+                saveLocation ? res.status(200).json({success:true, message:"saved"})
+                :
+                res.status(401).json({success:false, message:"Can't save"})
+            }
+            catch(err){
+                res.status(404).json({success:false, message:"Can't save"})
+            }
+        },
+        //edit location
+        async editLocation(req,res){
+            try{
+                let id = req.body._id
+                editbody = req.body
+                delete editbody._id
+                const editedData = await LocationSchema.findOneAndUpdate({"_id": id}, editbody)
+                editedData ? res.status(200).json({success:true, message: "Data updated"})
+                :
+                res.status(401).json({success:false, message: "Data update failed"}) 
+            }
+            catch(err){
+                res.status(404).json({success:false, message: err}) 
+            }
+        },
+        //delete location
+        async deleteLocation(req,res){
+            try{
+                const deleteData = await LocationSchema.findByIdAndDelete({_id:req.params.id})
+                deleteData ? res.status(200).json({success:true, message: "Data deleted"})
+                :
+                res.status(401).json({success:false, message: "Data can't delete"})
+            }
+            catch(err){
+                res.status(404).json({success:false, message: "Data can't delete"})
+            }
+        },
+
         //Post sub location
         async addSublocation(req,res){
             try{

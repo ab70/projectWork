@@ -1,12 +1,11 @@
 const mongoose = require('mongoose')
 
 const LocationSchema = new mongoose.Schema({
-    id: {type: String, trim: true,unique:true, default: ''},
-    divison_id: {type: String, trim:true},
-    name: {type: String, trim:true},
-    bn_name:{type: String, trim:true},
-    lat:{type: String, trim:true},
-    long:{type: String, trim:true}
-})
+
+    locationName: {type: String, trim:true},
+    ordering:{type:Number,default:10},
+    status:{type:String, default:"active"}
+
+},{timestamps:true})
 
 module.exports = mongoose.model('Location',LocationSchema )
