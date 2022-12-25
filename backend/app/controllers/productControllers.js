@@ -143,7 +143,46 @@ function productControllers(){
                 res.status(401).json({success: false, message: "Could not Sved"})
             }
             catch(err){
-                res.status(404).json({success: false, message: "Could not save"})
+                res.status(404).json({success: false, message: err})
+            }
+        },
+        //get a subllocation
+        async getAsublocation(req,res){
+            try{
+                const getdata = await SubLocationSchem.find({_id:req.params.id})
+                getdata ? res.status(200).json({success: true, message: "Found", data: getdata})
+                :
+                res.status(401).json({success: false, message: "Couldn't Found"})
+            }
+            catch(err){
+                res.status(404).json({success: false, message: err})
+            }
+        },
+        //edit sublocation
+        async editSublocation(req,res){
+            try{
+                let id = req.body._id
+                editbody = req.body
+                delete editbody._id
+                const editedData = await SubLocationSchem.findOneAndUpdate({"_id": id}, editbody)
+                editedData ? res.status(200).json({success:true, message: "Data updated"})
+                :
+                res.status(401).json({success:false, message: "Data update failed"}) 
+            }
+            catch(err){
+                res.status(404).json({success:false, message: err}) 
+            }
+        },
+        //delete a sublocation
+        async deleteSublocation(req,res){
+            try{
+                const deleteData = await SubLocationSchem.findByIdAndDelete({_id:req.params.id})
+                deleteData ? res.status(200).json({success:true, message: "Data deleted"})
+                :
+                res.status(401).json({success:false, message: "Data can't delete"})
+            }
+            catch(err){
+                res.status(404).json({success:false, message: "Data can't delete"})
             }
         }
     }
