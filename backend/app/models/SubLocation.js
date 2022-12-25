@@ -5,7 +5,7 @@ const SubLocationSchem = new mongoose.Schema({
     subLocationName: {type: String, required:true, trim:true},
     link: {type:String, trim:true},
     ordering:{type:Number, default:0},
-    status:{type:String, trim: true, default:"true"},
+    status:{type:String, trim: true, default:"active"},
 })
 
 module.exports = mongoose.model('Sublocation', SubLocationSchem)

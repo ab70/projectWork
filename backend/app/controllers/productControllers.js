@@ -146,6 +146,19 @@ function productControllers(){
                 res.status(404).json({success: false, message: err})
             }
         },
+        //get all sub locations under a location
+        async getAllSubLocations(req,res){
+            try{
+                const getData = await SubLocationSchem.find({locationid: req.params.id})
+                getData ? res.status(200).json({success:true, message:"data found", data:getData})
+                :
+                res.status(401).json({success:false, message:"data not found"})
+                
+            }
+            catch(err){
+                res.status(404).json({success:false, message:"data not found"})
+            }
+        },
         //get a subllocation
         async getAsublocation(req,res){
             try{
