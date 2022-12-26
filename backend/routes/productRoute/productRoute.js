@@ -20,17 +20,19 @@ router.post('/productimgdelete', productControllers().deletePhoto)
 //update product
 router.post('/updateproduct', uploads.any(), productControllers().editproduct)
 
+
+
 //location
 router.get('/alllocations', productControllers().getAllLocationNsubLocation)
 
 /* A route that will be used to get all locations. */
 router.get('/location', productControllers().getAllLocations)
 /* A route that will be used to add a location. */
-router.post('/location', productControllers().addLocation)
+router.post('/location', uploads.none(), productControllers().addLocation)
 /* A route that will be used to get a location. */
 router.get('/getalocation/:id', productControllers().getAlocation)
 /* A route that will be used to edit a location. */
-router.post('/editlocation', productControllers().editLocation)
+router.post('/editlocation', uploads.none(), productControllers().editLocation)
 /* Deleting a location. */
 router.delete('/deletelocation/:id',productControllers().deleteLocation)
 
@@ -38,7 +40,12 @@ router.delete('/deletelocation/:id',productControllers().deleteLocation)
 router.post('/postsublocation',uploads.none(), productControllers().addSublocation)
 router.get('/getsublocation/:id', productControllers().getAllSubLocationsunderLocation)
 router.get('/getasublocation/:id', productControllers().getAsublocation)
-router.post('/editsublocation', productControllers().editSublocation)
+router.post('/editsublocation',uploads.none(), productControllers().editSublocation)
 router.delete('/deletelocation/:id',productControllers().deleteSublocation)
+
+
+//buttons
+router.get('/buttons', productControllers().getButtons)
+
 
 module.exports = router
