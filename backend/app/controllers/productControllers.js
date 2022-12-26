@@ -182,8 +182,8 @@ function productControllers(){
                     location: {},
                     sublocations:[{}]
                 }]
-                let location = await LocationSchema.find({})
-                let sublocation = await SubLocationSchem.find({})
+                let location = await LocationSchema.find({}).sort({ordering: 'asc'})
+                let sublocation = await SubLocationSchem.find({}).sort({ordering: 'asc'})
                 location.forEach(e=>{
                     alllocation.push({location:e,sublocations:[]})
                 })
@@ -232,12 +232,14 @@ function productControllers(){
         async addSublocation(req,res){
             try{
                 const newSub = new SubLocationSchem(req.body)
+                console.log(newSub);
                 const saveSub = await newSub.save()
                 saveSub ? res.status(200).json({success: true, message: "Sved"})
                 :
                 res.status(401).json({success: false, message: "Could not Sved"})
             }
             catch(err){
+                console.log(err);
                 res.status(404).json({success: false, message: err})
             }
         },
