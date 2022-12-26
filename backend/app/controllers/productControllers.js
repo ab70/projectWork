@@ -232,8 +232,14 @@ function productControllers(){
         async addSublocation(req,res){
             try{
                 console.log(req.body);
-                const newSub = new SubLocationSchem(req.body)
-                console.log(newSub);
+                const newSub = new SubLocationSchem({
+                locationId: req.body.locationId,
+                subLocationName: req.body.subLocationName,
+                link: req.body.link,
+                ordering: req.body.ordering,
+                status: req.body.status
+                })
+                
                 const saveSub = await newSub.save()
                 saveSub ? res.status(200).json({success: true, message: "Sved"})
                 :

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const SubLocationSchem = new mongoose.Schema({
-    locationId: {type: mongoose.Schema.Types.ObjectId, ref:'Location', required: true},
+    locationId: {type: mongoose.Schema.Types.ObjectId, trim:true, ref:'Location', required: true},
     subLocationName: {type: String, required:true, trim:true},
     link: {type:String, trim:true},
     ordering:{type:Number, default:0},

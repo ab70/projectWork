@@ -35,7 +35,7 @@ router.post('/editlocation', productControllers().editLocation)
 router.delete('/deletelocation/:id',productControllers().deleteLocation)
 
 
-router.post('/postsublocation', productControllers().addSublocation)
+router.post('/postsublocation',uploads.none(), productControllers().addSublocation)
 router.get('/getsublocation/:id', productControllers().getAllSubLocationsunderLocation)
 router.get('/getasublocation/:id', productControllers().getAsublocation)
 router.post('/editsublocation', productControllers().editSublocation)
