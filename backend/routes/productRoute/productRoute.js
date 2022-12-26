@@ -21,8 +21,9 @@ router.post('/productimgdelete', productControllers().deletePhoto)
 router.post('/updateproduct', uploads.any(), productControllers().editproduct)
 
 //location
-router.get('/location', adminControllers().location)
+router.get('/location', productControllers().getAllLocations)
 router.post('/location', productControllers().addLocation)
+router.get('/getalocation/:id', productControllers().getAlocation)
 router.post('/editlocation', productControllers().editLocation)
 router.delete('/deletelocation/:id',productControllers().deleteLocation)
 

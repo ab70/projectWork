@@ -145,7 +145,7 @@ function productControllers(){
                 res.status(401).json({success:false, message:"Can't save"})
             }
             catch(err){
-                res.status(404).json({success:false, message:"Can't save"})
+                res.status(404).json({success:false, message:err})
             }
         },
         //edit location
@@ -173,6 +173,30 @@ function productControllers(){
             }
             catch(err){
                 res.status(404).json({success:false, message: "Data can't delete"})
+            }
+        },
+        //get all locations
+        async getAllLocations(req,res){
+            try{
+                const getdata = await LocationSchema.find({})
+                getdata ? res.status(200).json({success: true, message: "Found", data: getdata})
+                :
+                res.status(401).json({success: false, message: "Couldn't Found"})
+            }
+            catch(err){
+                res.status(404).json({success: false, message: err})
+            }
+        },
+        //get a locations info
+        async getAlocation(req,res){
+            try{
+                const getdata = await LocationSchema.find({_id:req.params.id})
+                getdata ? res.status(200).json({success: true, message: "Found", data: getdata})
+                :
+                res.status(401).json({success: false, message: "Couldn't Found"})
+            }
+            catch(err){
+                res.status(404).json({success: false, message: err})
             }
         },
 
