@@ -231,6 +231,7 @@ function productControllers(){
         //Post sub location
         async addSublocation(req,res){
             try{
+                console.log(req.body);
                 const newSub = new SubLocationSchem(req.body)
                 console.log(newSub);
                 const saveSub = await newSub.save()
