@@ -21,13 +21,22 @@ router.post('/productimgdelete', productControllers().deletePhoto)
 router.post('/updateproduct', uploads.any(), productControllers().editproduct)
 
 //location
+router.get('/alllocations', productControllers().getAllLocationNsubLocation)
+
+/* A route that will be used to get all locations. */
 router.get('/location', productControllers().getAllLocations)
+/* A route that will be used to add a location. */
 router.post('/location', productControllers().addLocation)
+/* A route that will be used to get a location. */
 router.get('/getalocation/:id', productControllers().getAlocation)
+/* A route that will be used to edit a location. */
 router.post('/editlocation', productControllers().editLocation)
+/* Deleting a location. */
 router.delete('/deletelocation/:id',productControllers().deleteLocation)
 
+
 router.post('/postsublocation', productControllers().addSublocation)
+router.get('/getsublocation/:id', productControllers().getAllSubLocationsunderLocation)
 router.get('/getasublocation/:id', productControllers().getAsublocation)
 router.post('/editsublocation', productControllers().editSublocation)
 router.delete('/deletelocation/:id',productControllers().deleteSublocation)

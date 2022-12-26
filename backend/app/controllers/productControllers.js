@@ -175,6 +175,34 @@ function productControllers(){
                 res.status(404).json({success:false, message: "Data can't delete"})
             }
         },
+        //get all location with sublocation
+        async getAllLocationNsubLocation(req,res){
+            try{
+                let alllocation = [{
+                    location: {},
+                    sublocations:[{}]
+                }]
+                let location = await LocationSchema.find({})
+                let sublocation = await SubLocationSchem.find({})
+                location.forEach(e=>{
+                    alllocation.push({location:e,sublocations:[]})
+                })
+                alllocation.shift();
+                for (let i = 0; i<sublocation.length; i++) {
+                    for(let j = 0; j<alllocation.length; j++){
+                        if(alllocation[j].location._id.toString()===sublocation[i].locationId.toString()){
+                            console.log("yes");  
+                            console.log(alllocation[j]);
+                            alllocation[j].sublocations.push(sublocation[i])
+                        }
+                    }
+                }
+                res.status(401).json({ success:true, message:"Found", data: alllocation})
+            }
+            catch(err){
+                res.status(404).json({ success:true, message:err})
+            }
+        },
         //get all locations
         async getAllLocations(req,res){
             try{
@@ -214,9 +242,9 @@ function productControllers(){
             }
         },
         //get all sub locations under a location
-        async getAllSubLocations(req,res){
+        async getAllSubLocationsunderLocation(req,res){
             try{
-                const getData = await SubLocationSchem.find({locationid: req.params.id})
+                const getData = await SubLocationSchem.find({locationId: req.params.id})
                 getData ? res.status(200).json({success:true, message:"data found", data:getData})
                 :
                 res.status(401).json({success:false, message:"data not found"})
