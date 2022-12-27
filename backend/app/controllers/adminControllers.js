@@ -209,14 +209,38 @@ function adminControllers(){
                 res.status(404).json({success: false,message: "Category fetch done", data: getdata})
             }
         },
+        //delete category
+        async deleteCategory(req,res){
+            
+            try {
+                const deleteData = await CategorySchema.findByIdAndDelete({ _id: req.params.id })
+                deleteData ? res.status(200).json({ success: true, message: "Data deleted" })
+                    :
+                res.status(401).json({ success: false, message: "Data can't delete" })
+            }
+            catch (err) {
+                res.status(404).json({ success: false, message: "Data can't delete" })
+            }
+
+
+
+        },
         //edit category
         async editCategory(req,res){
             try{
                 const id = req.body.id
                 let editBody = req.body
                 delete editBody.id
+                if(req.file){
+                    editBody.categoryImg = req.file.filename
+                    editBody.categoryImgPath = req.file.path
+                    
+                    const editedCat = await CategorySchema.findOneAndUpdate({"_id": id}, editBody)
+                }
+                else{
+                    const editedCat = await CategorySchema.findOneAndUpdate({"_id": id}, editBody)
+                }
                 
-                const editedCat = await CategorySchema.findOneAndUpdate({"_id": id}, editBody)
                 if(editedCat){
                     res.status(200).json({ succeess: true, message: "Category edit successful"})
                 }
@@ -259,6 +283,18 @@ function adminControllers(){
             }
             catch(err){
                 res.status(404).json({success: false, message: "Failed to Fetch", data: result})
+            }
+        },
+        //delete sub category
+        async deleteSubCategory(req,res){
+            try {
+                const deleteData = await SubcategorySchema.findByIdAndDelete({ _id: req.params.id })
+                deleteData ? res.status(200).json({ success: true, message: "Data deleted" })
+                    :
+                res.status(401).json({ success: false, message: "Data can't delete" })
+            }
+            catch (err) {
+                res.status(404).json({ success: false, message: "Data can't delete" })
             }
         },
         //Edit sub categories

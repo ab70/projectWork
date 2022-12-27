@@ -17,15 +17,19 @@ router.post('/createfeature', adminControllers().createFeature)
 router.get('/allfeatures', adminControllers().getAllFeatures)
 router.post('/editfeature', adminControllers().editFeature)
 
+
 //categorys
 router.get('/getallcategory', adminControllers().getAllCategory)
+router.delete('/deletecategory/:id',adminControllers().deleteCategory)
 router.post('/addcategory', uploads.single('categoryImg'), adminControllers().addCategory)
 router.post('/editcategory', adminControllers().editCategory)
 router.get('/getcatofparent/:id', adminControllers().getCategoryOfParent)
 
+
 //subcategory with feature select
 router.post('/addsubcategory', adminControllers().addSubcategory)
 router.get('/allsubcategory', adminControllers().getAllSubCategories)
+router.delete('/deletesubcat/:id', adminControllers().deleteSubCategory)
 router.get('/getsubcatofcat/:id', adminControllers().getSubcategoryOfCategory)
 router.get('/getfeaturesofsubcat/:id', adminControllers().getFeatureOfSubcategory)
 
