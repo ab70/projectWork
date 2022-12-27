@@ -198,7 +198,7 @@ function productControllers() {
                         }
                     }
                 }
-                res.status(401).json({ success: true, message: "Found", data: alllocation })
+                res.status(201).json({ success: true, message: "Found", data: alllocation })
             }
             catch (err) {
                 res.status(404).json({ success: true, message: err })
