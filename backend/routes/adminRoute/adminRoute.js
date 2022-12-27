@@ -22,7 +22,7 @@ router.post('/editfeature', adminControllers().editFeature)
 router.get('/getallcategory', adminControllers().getAllCategory)
 router.delete('/deletecategory/:id',adminControllers().deleteCategory)
 router.post('/addcategory', uploads.single('categoryImg'), adminControllers().addCategory)
-router.post('/editcategory', adminControllers().editCategory)
+router.post('/editcategory', uploads.single('categoryImg'), adminControllers().editCategory)
 router.get('/getcatofparent/:id', adminControllers().getCategoryOfParent)
 
 
