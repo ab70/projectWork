@@ -41,7 +41,7 @@ router.post('/postsublocation',uploads.none(), productControllers().addSublocati
 router.get('/getsublocation/:id', productControllers().getAllSubLocationsunderLocation)
 router.get('/getasublocation/:id', productControllers().getAsublocation)
 router.post('/editsublocation',uploads.none(), productControllers().editSublocation)
-router.delete('/deletelocation/:id',productControllers().deleteSublocation)
+router.delete('/deletesublocation/:id',productControllers().deleteSublocation)
 
 
 //buttons

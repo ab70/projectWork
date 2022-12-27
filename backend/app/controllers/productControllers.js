@@ -19,6 +19,9 @@ function productControllers() {
                 }
                 let databody = new ProductSchema(req.body)
                 databody.userId = '6398732316bd7468e63fa39a'
+
+                
+
                 let i = 0
                 req.files.forEach(e => {
                     databody.productImgs.push({ img: e.filename, longImg: req.body.productImg[i].longImg })
@@ -110,6 +113,9 @@ function productControllers() {
                     let id = req.body._id
                     let databody = req.body
                     delete databody.id
+                    if((databody.editDescription!=="") && (databody.acceptDescription==='accept')){
+                        databody.description = databody.editDescription
+                    }
                     const editedData = await FeatureSchema.findOneAndUpdate({ "_id": id }, databody)
                     editedData ? res.status(200).json({ success: true, message: "Edited done data" })
                         :
