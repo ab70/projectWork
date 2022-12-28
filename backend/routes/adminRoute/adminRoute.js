@@ -28,6 +28,7 @@ router.get('/getcatofparent/:id', adminControllers().getCategoryOfParent)
 
 //subcategory with feature select
 router.post('/addsubcategory', adminControllers().addSubcategory)
+router.post('/editsubcategory', adminControllers().editSubCatwithFeature)
 router.get('/allsubcategory', adminControllers().getAllSubCategories)
 router.delete('/deletesubcat/:id', adminControllers().deleteSubCategory)
 router.get('/getsubcatofcat/:id', adminControllers().getSubcategoryOfCategory)
