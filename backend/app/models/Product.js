@@ -10,8 +10,8 @@ const ProductSchema = new mongoose.Schema({
     subcategoryId: {type: mongoose.Schema.Types.ObjectId, ref:'Subcategory', required: true},
     sublocation:{type: mongoose.Schema.Types.ObjectId, ref:'Sublocation', required: true},
     productStatus: { type: String, enum:['active','inactive','pause','review','delete','atvMsg','unatvMsg'], default: 'review' },
-    slotStatus: {type:String,trim:true, default:'ok'},
-    showTill: {type: Date, default: moment().add(30, 'days').format('LL')},
+    slotStatus: {type:String,trim:true, enum:['ok','fail'], default:'ok'},
+    showTill: {type: Date, default: moment().add(60, 'days').format('LL')},
     notificationDialogue: {type:String, trim: true, default:''},
     productImgs :[ {img: {type: String, trim:true}, approved:{type: String, trim:true,default:'false'}, longImg:{type: String, trim:true, default: 'false' }}],
     quantity: {type: Number, default: 0, },
@@ -20,6 +20,8 @@ const ProductSchema = new mongoose.Schema({
     homeDelivery: {type: String, default: ''},
     homeDeliveryPrice: {type: Number, default:0 },
     packageId:{type: mongoose.Schema.Types.ObjectId, ref:'Package', default:''},
+    boosted:{type:Boolean, default:false},
+    publishedAt:{type: Date, default: '' },
     total: {
         impression: {type: Number, default:0 },
         reach: {type:Number, default: 0,},
@@ -36,10 +38,7 @@ const ProductSchema = new mongoose.Schema({
         click: {type:Number, default:0},
     },
     videoLink: { type: String, trim:true, default:''},
-    publishedAt:{type: Date, default: '' },
-    
-    features:[
-        
+    features:[ 
         {
             feature:{type: mongoose.Schema.Types.ObjectId, ref:'Feature', required: true},
             selectedOption:[{type: String, default:'', trim: true
