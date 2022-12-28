@@ -231,25 +231,37 @@ function adminControllers(){
             try{
                 const id = req.body.id
                 let editBody = req.body
+
                 delete editBody.id
                 if(req.file){
+
                     editBody.categoryImg = req.file.filename
                     editBody.categoryImgPath = req.file.path
                     
-                    const editedCat = await CategorySchema.findOneAndUpdate({"_id": id}, editBody)
+                    let editedCat = await CategorySchema.findOneAndUpdate({"_id": id}, editBody)
+                    if(editedCat){
+                        res.status(200).json({ succeess: true, message: "Category edit successful"})
+                    }
+                    else{
+                        res.status(401).json({ succeess: false, message: "Category edit failed"})
+                    }
+                
                 }
                 else{
-                    const editedCat = await CategorySchema.findOneAndUpdate({"_id": id}, editBody)
+                    let editedCat = await CategorySchema.findOneAndUpdate({"_id": id}, editBody)
+                    if(editedCat){
+                        res.status(200).json({ succeess: true, message: "Category edit successful"})
+                    }
+                    else{
+                        res.status(401).json({ succeess: false, message: "Category edit failed"})
+                    }
+                
                 }
                 
-                if(editedCat){
-                    res.status(200).json({ succeess: true, message: "Category edit successful"})
-                }
-                else{
-                    res.status(401).json({ succeess: false, message: "Category edit failed"})
-                }
+                
             }
             catch(errr){
+                console.log(errr);
                 res.status(404).json({ succeess: false, message: errr})
 
             }
