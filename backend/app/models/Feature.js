@@ -7,7 +7,7 @@ const FeatureSchema = new mongoose.Schema({
     featureType: {type: String, requred: true, trim: true },
     featureOrdering:{type:Number, default:0},
     status:{type:String, enum:['active','inactive'], default:'active'},
-    options: [{optionName: {type: String, required: true, trim: true}}]
+    options: [{optionName: { required: true}}]
 
 },{timestamps: true})
 
