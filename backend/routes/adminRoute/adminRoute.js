@@ -12,13 +12,15 @@ router.get('/alluser', adminControllers().getAllUser)
 router.get('/getuser/:id', adminControllers().getAusersData)
 router.get('/getloggedinuser', auth, adminControllers().getLoggedInUser)
 
+
 //feature
 router.post('/createfeature', adminControllers().createFeature)
 router.get('/allfeatures', adminControllers().getAllFeatures)
 router.post('/editfeature', adminControllers().editFeature)
+router.delete('/deletefeature/:id', adminControllers().deleteFeature)
 
 
-//categorys
+//categories
 router.get('/getallcategory', adminControllers().getAllCategory)
 router.delete('/deletecategory/:id',adminControllers().deleteCategory)
 router.post('/addcategory', uploads.single('categoryImg'), adminControllers().addCategory)

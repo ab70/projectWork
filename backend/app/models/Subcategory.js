@@ -5,7 +5,7 @@ const SubcategorySchema = mongoose.Schema({
     subCategoryName:{type: String, trim: true,required: true},
     freePost : {type: Number, required: true, },
     ordering: {type: Number, required: true},
-    status: {type: String,enum:['active','inactive'], default: 'active'},
+    status: {type: String, enum:['active','inactive'], default: 'active'},
     features: [{type: mongoose.Schema.Types.ObjectId, ref:'Feature'}]
     
 })

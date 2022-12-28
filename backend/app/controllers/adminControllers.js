@@ -161,6 +161,20 @@ function adminControllers(){
             }
            
         },
+        //delete features
+        async deleteFeature(req,res){
+            try {
+                const deleteData = await FeatureSchema.findByIdAndDelete({ _id: req.params.id })
+                deleteData ? res.status(200).json({ success: true, message: "Data deleted" })
+                    :
+                res.status(401).json({ success: false, message: "Data can't delete" })
+            }
+            catch (err) {
+                res.status(404).json({ success: false, message: "Data can't delete" })
+            }
+
+        },
+
         //ADD NEW CATEGORY
         async addCategory(req,res){
             try{
@@ -287,19 +301,20 @@ function adminControllers(){
         async editSubCatwithFeature(req,res){
             try{
                 let id = req.body.id
-                let bodyData = req.body //here to set new object that will be placed in db obj
+                let bodyData = req.body   //here to set new object that will be placed in db obj
                 delete bodyData.id
-
+                console.log(bodyData);
                 const editedData = await SubcategorySchema.findOneAndUpdate({"_id": id}, bodyData)
-                    if(!editedData){
-                        res.status(401).json({success: false, message: "Can't Edit feature" })
-                    }
-                    else{
-                        res.status(200).json({success: true, message: "Edit feature Done"})
-                    }
+                if(!editedData){
+                    res.status(401).json({success: false, message: "Can't Edit " })
+                }
+                else{
+                    res.status(200).json({success: true, message: "Edit  Done"})
+                }
             }
             catch(err){
-                res.status(404).json({success: false, message: "Can't Edit feature" })
+                console.log(err);
+                res.status(404).json({success: false, message: "Can't Edit" })
             }
         },
         //get all sub categories

@@ -110,7 +110,7 @@ function productControllers() {
         async editproduct(req, res) {
             try {
                 if (!req.files) {
-                    let id = req.body._id
+                    let id = req.body.id
                     let databody = req.body
                     delete databody.id
                     if((databody.editDescription!=="") && (databody.acceptDescription==='accept')){
@@ -122,7 +122,7 @@ function productControllers() {
                     res.status(401).json({ success: false, message: "Edited not successful." })
                 }
                 else {
-                    let id = req.body._id
+                    let id = req.body.id
                     let databody = req.body
                     delete databody.id
 
