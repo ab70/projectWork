@@ -175,6 +175,7 @@ function adminControllers(){
                         parentId: req.body.parentId,
                         categoryName: req.body.categoryName,
                         categoryOrder: req.body.categoryOrder,
+                        buttons:req.body.buttons,
                         categoryImg: req.file.filename,
                         categoryImgPath: req.file.path 
                     })
@@ -201,7 +202,7 @@ function adminControllers(){
         //get all category
         async getAllCategory(req,res){
             try{
-                const getdata = await CategorySchema.find({})
+                const getdata = await CategorySchema.find({}).populate('buttons')
                 if(getdata){res.status(200).json({success: true,message: "Category fetch done", data: getdata})}
                 else{res.status(401).json({success: false,message: "Category fetch done", data: getdata})}
             }
@@ -283,6 +284,34 @@ function adminControllers(){
             }
             catch(err){
                 res.status(404).json({success: false, message: "Failed to Fetch", data: result})
+            }
+        },
+        //get all category and its all sub category
+        async getAllCatNsubCat(req,res){
+            try {
+                let allcategory = [{
+                    category: {},
+                    subCategory: [{}]
+                }]
+                let categori = await CategorySchema.find({}).sort({ categoryOrder: 'asc' })
+                let subcategory = await SubcategorySchema.find({}).sort({ ordering: 'asc' })
+                categori.forEach(e => {
+                    allcategory.push({ category: e, subCategory: [] })
+                })
+                allcategory.shift();
+                for (let i = 0; i < subcategory.length; i++) {
+                    for (let j = 0; j < allcategory.length; j++) {
+                        if (allcategory[j].category._id.toString() === subcategory[i].categoryId.toString()) {
+                            
+                            allcategory[j].subCategory.push(subcategory[i])
+                        }
+                    }
+                }
+                res.status(201).json({ success: true, message: "Found", data: allcategory })
+            }
+            catch (err) {
+                console.log(err);
+                res.status(404).json({ success: false, message: err })
             }
         },
         //delete sub category

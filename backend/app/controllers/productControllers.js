@@ -118,8 +118,8 @@ function productControllers() {
                     }
                     const editedData = await FeatureSchema.findOneAndUpdate({ "_id": id }, databody)
                     editedData ? res.status(200).json({ success: true, message: "Edited done data" })
-                        :
-                        res.status(401).json({ success: false, message: "Edited not successful." })
+                    :
+                    res.status(401).json({ success: false, message: "Edited not successful." })
                 }
                 else {
                     let id = req.body._id

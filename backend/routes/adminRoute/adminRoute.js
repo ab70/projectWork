@@ -33,5 +33,8 @@ router.delete('/deletesubcat/:id', adminControllers().deleteSubCategory)
 router.get('/getsubcatofcat/:id', adminControllers().getSubcategoryOfCategory)
 router.get('/getfeaturesofsubcat/:id', adminControllers().getFeatureOfSubcategory)
 
+//get all category and sub category nested
+router.get('/allcategorynsubcat', adminControllers().getAllCatNsubCat) 
+
 
 module.exports = router
