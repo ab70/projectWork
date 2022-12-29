@@ -11,19 +11,26 @@ router.get('/allcat',productControllers().parentCatSubcat)
 
 // Add product
 router.post('/addproduct',uploads.any(), productControllers().addNewProduct)
+
+//get all product
 router.get('/products', productControllers().getAllProduct)
+//get a user id for posting product
 router.get('/product/:emailphone' , productControllers().getAlUser)
-//get product
+//get A product
 router.get('/products/:id', productControllers().getAProduct)
 
 
 
-//product img 
+//product img approve
 router.post('/approvephoto', productControllers().productImgApprove)
+//product image delete
 router.post('/productimgdelete', productControllers().deletePhoto)
 
 //update product
 router.post('/updateproduct', uploads.any(), productControllers().editproduct)
+
+//delete product
+router.delete('/deleteproductbyid/:id', productControllers().deleteProduct)
 
 
 

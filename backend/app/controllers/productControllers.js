@@ -88,10 +88,23 @@ function productControllers() {
         //approve picture of product img
         async productImgApprove(req, res) {
             try {
-                let findObj = await ProductSchema.update({ "productImgs._id": req.body.id }, { "$set": { "productImgs.$.approved": req.body.approved } })
+                
+                let findObj = await ProductSchema.update({ "productImgs._id": id }, { "$set": { "productImgs.$.approved": req.body.approved } })
+                let changed = 'no'
+                let id = findObj._id
+                findObj.productImgs.every(e=>{
+                    if(e.approved ==='false'){
+                        changed = 'yes'
+                        return false
+                    }
+                    return true
+                })
+                if(changed==='no'){
+                    await ProductSchema.findByIdAndUpdate({_id:id},{$set: { imageChanged: changed }}, {upsert: true})
+                }
                 findObj ? res.status(200).json({ success: true, message: "found", data: findObj })
-                    :
-                    res.status(401).json({ success: false, message: "not found" })
+                :
+                res.status(401).json({ success: false, message: "not found" })
             }
             catch (err) {
                 res.status(404).json({ success: false, message: "found" })
@@ -144,6 +157,19 @@ function productControllers() {
                 res.status(404).json({ success: false, message: "Data update failed" })
             }
         },
+        //delete a product
+        async deleteProduct(req,res){
+            try {
+                const deleteData = await ProductSchema.findByIdAndDelete({ _id: req.params.id })
+                deleteData ? res.status(200).json({ success: true, message: "Data deleted" })
+                :
+                res.status(401).json({ success: false, message: "Data can't delete" })
+            }
+            catch (err) {
+                res.status(404).json({ success: false, message: "Data can't delete" })
+            }
+        },
+
         //add location
         async addLocation(req, res) {
             try {
