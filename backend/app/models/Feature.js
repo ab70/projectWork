@@ -4,7 +4,7 @@ const mongoose = require('mongoose')
 const FeatureSchema = new mongoose.Schema({
     
     featureName: { type: String, requred: true, trim: true},
-    featureType: {type: String,enum:["radio","multiselect","select","singleinput","doubleinput","datepicker","rule"], requred: true, trim: true },
+    featureType: {type: String,enum:["radio","multiselect","select","singleinput","checkinput","doubleinput","datepicker","rule"], requred: true, trim: true },
     featureOrdering:{type:Number, default:0},
     status:{type:String, enum:['active','inactive'], default:'active'},
     options: [{optionName: {}}]

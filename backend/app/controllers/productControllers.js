@@ -2,7 +2,10 @@ const ProductSchema = require('../models/Product')
 const ButtonSchema = require('../models/Buttons')
 const UserSchema = require('../models/User')
 const LocationSchema = require('../models/Location')
+const CategorySchema = require('../models/Category')
 const SubLocationSchem = require('../models/SubLocation')
+const ParentCategory = require('../models/ParentCategory')
+const SubcategorySchema = require('../models/Subcategory')
 
 function productControllers() {
     return {
@@ -318,6 +321,59 @@ function productControllers() {
             }
             catch (err) {
                 res.status(404).json({success:false, message:"Cant' find data"})
+            }
+        },
+        //get all cat sub cat with parent cat
+        async parentCatSubcat(req,res){
+            try{
+                let allCombinedCat = [{
+                    parent:{},
+                    categories:[{
+                        category:{},
+                        subcategories:[]
+                    }]
+
+                }]
+                let allParent = await ParentCategory.find({})
+                let allCat = await CategorySchema.find({})
+                let allsub = await SubcategorySchema.find({})
+                allParent.forEach(e => {
+                    allCombinedCat.push({ parent: e, categories: [{category:{},subcategories:[]}] })
+                })
+                allCombinedCat.shift();
+                allCombinedCat[0].categories.shift();
+                
+                for (let i = 0; i < allCat.length; i++) {
+                    for (let j = 0; j < allCombinedCat.length; j++) {
+                        if (allCombinedCat[j].parent._id.toString() === allCat[i].parentId.toString()) {
+                            console.log("yes");
+                            allCombinedCat[j].categories.push({category:allCat[i],subcategories:[]})
+                        }
+                    }
+                }
+                allCombinedCat.forEach(e => {
+                    e.categories.forEach(ej =>{
+                        for (let i = 0; i < allsub.length; i++){
+                            if(ej.category._id.toString() === allsub[i].categoryId.toString()){
+                                console.log(ej.category._id.toString());
+                                
+                                console.log(allsub[i].categoryId.toString())
+                                console.log('--');
+                                
+                                ej.subcategories.push({a:'hello'})
+                            }
+                            console.log(i);
+                        }                        
+                        
+                    })
+                });
+                
+            console.log(allCombinedCat);
+                
+                res.status(200).json({success:true, message: "Fetch done", data: allCombinedCat})
+            }
+            catch(err){
+
             }
         }
     }

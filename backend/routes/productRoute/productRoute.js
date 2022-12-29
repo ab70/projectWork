@@ -4,6 +4,11 @@ const uploads = require('../../app/middlewares/uploads')
 const productControllers = require('../../app/controllers/productControllers')
 const adminControllers = require('../../app/controllers/adminControllers')
 
+
+//all category
+router.get('/allcat',productControllers().parentCatSubcat)
+
+
 // Add product
 router.post('/addproduct',uploads.any(), productControllers().addNewProduct)
 router.get('/products', productControllers().getAllProduct)
