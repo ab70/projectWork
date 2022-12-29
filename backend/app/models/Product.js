@@ -34,7 +34,7 @@ const ProductSchema = new mongoose.Schema({
         click: {type:Number, default:0},
     },
     videoLink: { type: String, trim:true, default:''},
-    videoLickAccept:{type:String, trim:true, enum:['accept','reject'], default:'reject'},
+    videoLinkAccept:{type:String, trim:true, enum:['accept','reject'], default:'reject'},
     features:[ 
         {
             feature:{type: mongoose.Schema.Types.ObjectId, ref:'Feature', required: true},
