@@ -341,7 +341,6 @@ function productControllers() {
                     allCombinedCat.push({ parent: e, categories: [{category:{},subcategories:[]}] })
                 })
                 allCombinedCat.shift();
-                allCombinedCat[0].categories.shift();
                 
                 for (let i = 0; i < allCat.length; i++) {
                     for (let j = 0; j < allCombinedCat.length; j++) {
@@ -351,21 +350,21 @@ function productControllers() {
                         }
                     }
                 }
+                allCombinedCat.forEach(e=>{
+                    e.categories.shift();
+                })
+                
                 allCombinedCat.forEach(e => {
-                    e.categories.forEach(ej =>{
-                        for (let i = 0; i < allsub.length; i++){
-                            if(ej.category._id.toString() === allsub[i].categoryId.toString()){
-                                console.log(ej.category._id.toString());
-                                
-                                console.log(allsub[i].categoryId.toString())
-                                console.log('--');
-                                
-                                ej.subcategories.push({a:'hello'})
-                            }
-                            console.log(i);
-                        }                        
                         
-                    })
+                        e.categories.forEach(ej =>{
+                            for (let i = 0; i < allsub.length; i++){
+                                if(ej.category._id.toString() === allsub[i].categoryId.toString()){ 
+                                    ej.subcategories.push(allsub[i])
+                                }
+                            }                        
+              
+                        })
+
                 });
                 
             console.log(allCombinedCat);
