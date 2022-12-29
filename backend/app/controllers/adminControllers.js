@@ -146,14 +146,14 @@ function adminControllers(){
                 let id = req.body.id
                 let bodyData = req.body //here to set new object that will be placed in db obj
                 delete bodyData.id
-
+  
                 const editedData = await FeatureSchema.findOneAndUpdate({"_id": id}, bodyData)
-                    if(!editedData){
+                if(!editedData){
                         res.status(401).json({success: false, message: "Can't Edit feature" })
-                    }
-                    else{
+                }
+                else{
                         res.status(200).json({success: true, message: "Edit feature Done"})
-                    }
+                }
    
             }
             catch(err){
