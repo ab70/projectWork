@@ -18,3 +18,5 @@ function packageControllers(){
         }
     }
 }
+
+module.exports = packageControllers

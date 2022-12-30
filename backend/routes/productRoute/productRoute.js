@@ -13,7 +13,7 @@ router.get('/allcat',productControllers().parentCatSubcat)
 router.post('/addproduct',uploads.any(), productControllers().addNewProduct)
 
 //get all product
-router.get('/products', productControllers().getAllProduct)
+router.get('/allproducts', productControllers().getAllProduct)
 //get a user id for posting product
 router.get('/product/:emailphone' , productControllers().getAlUser)
 //get A product

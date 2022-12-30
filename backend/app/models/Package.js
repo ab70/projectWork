@@ -8,6 +8,10 @@ const PackageSchema = new mongoose.Schema({
     validDays:{type: Number, default:0, required:true},
     packageStatus:{type: Boolean, default: true},
     bundle:{
+        postAccess:[{
+            parentId:{type: mongoose.Schema.Types.ObjectId, ref:'Parentcategory'},
+            noOfPost:{type:Number}
+        }],
         post:[{
             categories:[{
                 categoryId: [{type: mongoose.Schema.Types.ObjectId, ref:'Category',}]
