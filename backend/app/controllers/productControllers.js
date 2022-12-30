@@ -47,7 +47,7 @@ function productControllers() {
         //get all product
         async getAllProduct(req, res) {
             try {
-                const prodData = await ProductSchema.find({}).populate('features.feature')
+                const prodData = await ProductSchema.find({}).populate('sublocation subcategoryId features.feature')
                 if (prodData) {
                     res.status(200).json({ success: true, message: "Product fetched", data: prodData })
                 }
