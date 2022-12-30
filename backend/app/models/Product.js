@@ -10,6 +10,7 @@ const ProductSchema = new mongoose.Schema({
     subcategoryId: {type: mongoose.Schema.Types.ObjectId, ref:'Subcategory', required: true},
     sublocation:{type: mongoose.Schema.Types.ObjectId, ref:'Sublocation', required: true},
     productStatus: { type: String, enum:['active','inactive','pause','review','delete','atvMsg','unatvMsg'], default: 'review' },
+    productOrder:{type:Number, default:0},
     slotStatus: {type:String,trim:true, enum:['ok','fail'], default:'ok'},
     showTill: {type: Date, default: moment().add(60, 'days').format('LL')},
     notificationDialogue: {type:String, trim: true, default:''},

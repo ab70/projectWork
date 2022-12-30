@@ -23,9 +23,12 @@ function productControllers() {
                 let databody = new ProductSchema(req.body)
                 databody.userId = '6398732316bd7468e63fa39a'
 
-                
+                /* Finding the count of the documents in the collection and adding 1 to it. */
+                let countObj = await ProductSchema.find().count() +1
+                databody.productOrder = countObj
 
                 let i = 0
+                /* Pushing the filename of the image into the productImgs array. */
                 req.files.forEach(e => {
                     databody.productImgs.push({ img: e.filename, longImg: req.body.productImg[i].longImg })
                 });
@@ -47,7 +50,7 @@ function productControllers() {
         //get all product
         async getAllProduct(req, res) {
             try {
-                const prodData = await ProductSchema.find({}).populate('sublocation subcategoryId features.feature')
+                const prodData = await ProductSchema.find({}).populate('sublocation subcategoryId features.feature').sort({productOrder:-1})
                 if (prodData) {
                     res.status(200).json({ success: true, message: "Product fetched", data: prodData })
                 }
