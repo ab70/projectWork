@@ -145,15 +145,16 @@ function productControllers() {
                     let id = req.body._id
                     let databody = req.body
                     delete databody._id
-                    console.log(databody);
                     if((databody.editDescription!=="") && (databody.acceptDescription==='accept')){
                         databody.description = databody.editDescription
                     }
+                    let imgData =[]
                     let i = 0
                     req.files.forEach(e => {
-                        databody.productImgs.push({ img: e.filename, longImg: req.body.productImg[i].longImg })
+                        imgData.push({ img: e.filename, longImg: req.body.productImg[i].longImg })
                     });
                     let editedData = await ProductSchema.findOneAndUpdate({ "_id": id }, databody)
+                    let imgUpdate = await ProductSchema.findOneAndUpdate({"_id":id},{$push:{productImgs:{$each:imgData}}})
                     editedData ? res.status(200).json({ success: true, message: "Data updated with image" })
                     :
                     res.status(401).json({ success: false, message: "Data update failed" })
