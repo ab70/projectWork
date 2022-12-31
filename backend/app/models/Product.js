@@ -15,7 +15,7 @@ const ProductSchema = new mongoose.Schema({
     slotStatus: {type:String,trim:true, enum:['ok','fail'], default:'ok'},
     showTill: {type: Date, default: moment().add(60, 'days').format('LL')},
     notificationDialogue: {type:String, trim: true, default:''},
-    productImgs :[ {img: {type: String, trim:true}, approved:{type: String, trim:true,default:'false'}, longImg:{type: String, trim:true, default: 'false' }}],
+    productImgs :[ {img: {type: String, trim:true}, approved:{type: Boolean, default: false}, longImg:{type: Boolean,  default: false }}],
     imageChanged:{type:String, enum:['yes','no'], default:'yes'},
     //packageId:{type: mongoose.Schema.Types.ObjectId, ref:'Package', default:''},
     boosted:{type:Boolean, default:false},

@@ -93,18 +93,18 @@ function productControllers() {
             try {
                 
                 let findObj = await ProductSchema.update({ "productImgs._id": id }, { "$set": { "productImgs.$.approved": req.body.approved } })
-                let changed = 'no'
+                let changed = false
                 let id = findObj._id
                 findObj.productImgs.every(e=>{
-                    if(e.approved==='false'){
-                        changed = 'yes'
+                    if(e.approved===false){
+                        changed = true
                         return false
                     }
                     return true
                 })
-                if(changed==='no'){
-                    await ProductSchema.findByIdAndUpdate({_id:id},{$set: { imageChanged: changed }}, {upsert: true})
-                }
+               
+                await ProductSchema.findByIdAndUpdate({_id:id},{$set: { imageChanged: changed }}, {upsert: true})
+
                 findObj ? res.status(200).json({ success: true, message: "found", data: findObj })
                 :
                 res.status(401).json({ success: false, message: "not found" })
