@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const moment = require('moment')
+const FeatureSchema = require('./Feature')
 
 const ProductSchema = new mongoose.Schema({
     userId : {type: mongoose.Schema.Types.ObjectId, ref:'User', required: true},

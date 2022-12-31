@@ -136,7 +136,7 @@ function productControllers() {
                     if((databody.editDescription!=="") && (databody.acceptDescription==='accept')){
                         databody.description = databody.editDescription
                     }
-                    let editedData = await FeatureSchema.findOneAndUpdate({ "_id": id }, databody)
+                    let editedData = await ProductSchema.findOneAndUpdate({ "_id": id }, databody)
                     editedData ? res.status(200).json({ success: true, message: "Edited done data" })
                     :
                     res.status(401).json({ success: false, message: "Edited not successful." })
@@ -153,7 +153,7 @@ function productControllers() {
                     req.files.forEach(e => {
                         databody.productImgs.push({ img: e.filename, longImg: req.body.productImg[i].longImg })
                     });
-                    let editedData = await FeatureSchema.findOneAndUpdate({ "_id": id }, databody)
+                    let editedData = await ProductSchema.findOneAndUpdate({ "_id": id }, databody)
                     editedData ? res.status(200).json({ success: true, message: "Data updated with image" })
                     :
                     res.status(401).json({ success: false, message: "Data update failed" })
