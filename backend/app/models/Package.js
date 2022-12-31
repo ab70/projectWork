@@ -14,7 +14,7 @@ const PackageSchema = new mongoose.Schema({
         }],
         post:[{
             categories:[{
-                categoryId: [{type: mongoose.Schema.Types.ObjectId, ref:'Category',}]
+                categoryId: {type: mongoose.Schema.Types.ObjectId, ref:'Category',}
             },
             ],
             reach: {type:Number, },
@@ -22,7 +22,7 @@ const PackageSchema = new mongoose.Schema({
         }],
         bidnOffer:[{
             categories:[{
-                categoryId: [{type: mongoose.Schema.Types.ObjectId, ref:'Category',}]
+                categoryId: {type: mongoose.Schema.Types.ObjectId, ref:'Category',}
             },
             ],
             reach: {type:Number,},
@@ -30,7 +30,7 @@ const PackageSchema = new mongoose.Schema({
         }],
         stickersSort:[{
             categories:[{
-                categoryId: [{type: mongoose.Schema.Types.ObjectId, ref:'Category',}]
+                categoryId: {type: mongoose.Schema.Types.ObjectId, ref:'Category',}
             },
             ],
             urgent: {type:Number, },
@@ -39,7 +39,7 @@ const PackageSchema = new mongoose.Schema({
     },
     single:[{
         categories:[{
-            categoryId: [{type: mongoose.Schema.Types.ObjectId, ref:'Category',}]
+            categoryId: {type: mongoose.Schema.Types.ObjectId, ref:'Category',}
         },
         ],
         reach: {type:Number,},
@@ -47,7 +47,7 @@ const PackageSchema = new mongoose.Schema({
     }],
     sticker:[{
         categories:[{
-            categoryId: [{type: mongoose.Schema.Types.ObjectId, ref:'Category',}]
+            categoryId: {type: mongoose.Schema.Types.ObjectId, ref:'Category',}
         },
         ],
         reach: {type:Number,},

@@ -62,7 +62,7 @@ function productControllers() {
                 res.status(200).json({ success: false, message: err, })
             }
         },
-        //get a products info
+        //get a product info
         async getAProduct(req, res) {
             try {
                 const getData = await ProductSchema.find({ _id: req.params.id }).populate('categoryId location features.feature')
@@ -129,9 +129,10 @@ function productControllers() {
         async editproduct(req, res) {
             try {
                 if (!req.files) {
-                    let id = req.body.id
+                    let id = req.body._id
                     let databody = req.body
-                    delete databody.id
+                    delete databody._id
+                    console.log(databody);
                     if((databody.editDescription!=="") && (databody.acceptDescription==='accept')){
                         databody.description = databody.editDescription
                     }
@@ -141,9 +142,10 @@ function productControllers() {
                     res.status(401).json({ success: false, message: "Edited not successful." })
                 }
                 else {
-                    let id = req.body.id
+                    let id = req.body._id
                     let databody = req.body
-                    delete databody.id
+                    delete databody._id
+                    console.log(databody);
                     if((databody.editDescription!=="") && (databody.acceptDescription==='accept')){
                         databody.description = databody.editDescription
                     }
@@ -158,6 +160,7 @@ function productControllers() {
                 }
             }
             catch (err) {
+                console.log(err);
                 res.status(404).json({ success: false, message: err })
             }
         },
