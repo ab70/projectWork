@@ -1,3 +1,4 @@
+const mongoose = require('mongoose')
 const ProductSchema = require('../models/Product')
 const ButtonSchema = require('../models/Buttons')
 const UserSchema = require('../models/User')
@@ -91,26 +92,31 @@ function productControllers() {
         //approve picture of product img
         async productImgApprove(req, res) {
             try {
+                let ids = req.body.id.replace(/ /g, "")
                 
-                let findObj = await ProductSchema.update({ "productImgs._id": id }, { "$set": { "productImgs.$.approved": req.body.approved } })
-                let changed = false
-                let id = findObj._id
-                findObj.productImgs.every(e=>{
-                    if(e.approved===false){
-                        changed = true
-                        return false
-                    }
-                    return true
-                })
+                console.log(ids);
+                // let findDataaaaa = await ProductSchema.findById({"_id":ids})
+                
+                let findObj = await ProductSchema.updateOne({"productImgs._id":ids}, { "$set": { "productImgs.$.approved": true } },{arrayFilters:[{"productImgs._id":ids}]})
+                // let changed = false
+                // let id = findObj._id
+                // findObj.productImgs.every(e=>{
+                //     if(e.approved===false){
+                //         changed = true
+                //         return false
+                //     }
+                //     return true
+                // })
                
-                await ProductSchema.findByIdAndUpdate({_id:id},{$set: { imageChanged: changed }}, {upsert: true})
+                // await ProductSchema.findByIdAndUpdate({_id:id},{$set: { imageChanged: changed }}, {upsert: true})
 
                 findObj ? res.status(200).json({ success: true, message: "found", data: findObj })
                 :
                 res.status(401).json({ success: false, message: "not found" })
             }
             catch (err) {
-                res.status(404).json({ success: false, message: "found" })
+                console.log(err);
+                res.status(404).json({ success: false, message: err })
             }
         },
         //delete a photo
@@ -132,7 +138,7 @@ function productControllers() {
                     let id = req.body._id
                     let databody = req.body
                     delete databody._id
-                    console.log(databody);
+
                     if((databody.editDescription!=="") && (databody.acceptDescription==='accept')){
                         databody.description = databody.editDescription
                     }
