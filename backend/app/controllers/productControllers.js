@@ -98,17 +98,18 @@ function productControllers() {
                 // let findDataaaaa = await ProductSchema.findById({"_id":ids})
                 
                 let findObj = await ProductSchema.updateOne({"productImgs._id":ids}, { "$set": { "productImgs.$.approved": true } },{arrayFilters:[{"productImgs._id":ids}]})
-                // let changed = false
-                // let id = findObj._id
-                // findObj.productImgs.every(e=>{
-                //     if(e.approved===false){
-                //         changed = true
-                //         return false
-                //     }
-                //     return true
-                // })
+                let changed = false
+                let getObj = await ProductSchema.findById({"_id":req.body.approved})
+                let id = getObj._id
+                getObj.productImgs.every(e=>{
+                    if(e.approved===false){
+                        changed = true
+                        return false
+                    }
+                    return true
+                })
                
-                // await ProductSchema.findByIdAndUpdate({_id:id},{$set: { imageChanged: changed }}, {upsert: true})
+                await ProductSchema.findByIdAndUpdate({_id:id},{$set: { imageChanged: changed }}, {upsert: true})
 
                 findObj ? res.status(200).json({ success: true, message: "found", data: findObj })
                 :
@@ -139,13 +140,14 @@ function productControllers() {
                     let databody = req.body
                     delete databody._id
 
-                    if((databody.editDescription!=="") && (databody.acceptDescription==='accept')){
-                        databody.description = databody.editDescription
-                    }
+                    // if((databody.editDescription!=="") && (databody.acceptDescription==='accept')){
+                    //     databody.description = databody.editDescription
+                    // }
+                    // databody.editDescription = req.body.editDescription
                     let editedData = await ProductSchema.findOneAndUpdate({ "_id": id }, databody)
                     editedData ? res.status(200).json({ success: true, message: "Edited done data" })
                     :
-                    res.status(401).json({ success: false, message: "Edited not successful." })
+                    res.status(401).json({ success: false, message: "Edited not successful."})
                 }
                 else {
                     let id = req.body._id
