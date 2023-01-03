@@ -28,6 +28,7 @@ router.delete('/deletecoupon/:id', packageControllers().deleteCoupons)
 //Sorting package
 router.get('/sort', packageControllers().getAllSort)
 router.post('/sort', packageControllers().addSorting)
-
+router.post('/editsort', packageControllers().editSort)
+router.delete('/deletesort/:id',packageControllers().deleteSort)
 
 module.exports = router

@@ -29,6 +29,32 @@ function packageControllers(){
                 res.status(500).json({success:false, message:"can't find"})
             }
         },
+        //Edit sort
+        async editSort(req,res){
+            try {
+                let id = req.body._id
+                editbody = req.body
+                delete editbody._id
+                const editedData = await Sortschema.findOneAndUpdate({"_id": id }, editbody)
+                editedData ? res.status(200).json({ success: true, message: "Data updated"})
+                :
+                res.status(401).json({success: false, message: "Data update failed"})
+            }
+            catch (err) {
+                res.status(404).json({success: false, message: err.message})
+            }
+        },
+        async deleteSort(req,res){
+            try {
+                const deleteData = await Sortschema.findByIdAndDelete({ _id: req.params.id })
+                deleteData ? res.status(200).json({ success: true, message: "Data deleted" })
+                :
+                res.status(401).json({ success: false, message: "Data can't delete" })
+            }
+            catch (err) {
+                res.status(404).json({ success: false, message: "Data can't delete" })
+            }
+        },
         //Add new package
         async addNewPackage(req,res){
             try{
