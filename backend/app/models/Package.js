@@ -27,25 +27,21 @@ const PackageSchema = new mongoose.Schema({
             noOfPost:{type:Number}
         }],
         post:[{
-            subcategories:[{
-                subCategoryId: {type: mongoose.Schema.Types.ObjectId, ref:'Subcategory',}
-            },
-            ],
+            subcategories:[ {type: mongoose.Schema.Types.ObjectId, ref:'Subcategory',}
+           ],
             reach: {type:Number, },
             click:{type: Number,},
         }],
         bidnOffer:[{
-            subcategories:[{
-                subCategoryId: {type: mongoose.Schema.Types.ObjectId, ref:'Subcategory',}
-            },
+            subcategories:[{type: mongoose.Schema.Types.ObjectId, ref:'Subcategory',}
+
             ],
             reach: {type:Number,},
             click:{type: Number, },
         }],
         stickersSort:[{
-            subcategories:[{
-                subCategoryId: {type: mongoose.Schema.Types.ObjectId, ref:'Subcategory',}
-            },
+            subcategories:[{type: mongoose.Schema.Types.ObjectId, ref:'Subcategory',}
+
             ],
             sorts:[{
                 sortId: {type: mongoose.Schema.Types.ObjectId, ref:'Sort',},
@@ -58,9 +54,7 @@ const PackageSchema = new mongoose.Schema({
         note:{type:String, trim:true}
     },
     single:{
-        subcategories:[{
-            subCategoryId: {type: mongoose.Schema.Types.ObjectId, ref:'Subcategory',}
-        },
+        subcategories:[{type: mongoose.Schema.Types.ObjectId, ref:'Subcategory',}
         ],
         price:{type:Number},
         reach: {type:Number,},
@@ -68,9 +62,7 @@ const PackageSchema = new mongoose.Schema({
         minAmount: {type:Number, },
     },
     sort:{
-        subcategories:[{
-            subCategoryId: {type: mongoose.Schema.Types.ObjectId, ref:'Subcategory'}
-        },
+        subcategories:[{type: mongoose.Schema.Types.ObjectId, ref:'Subcategory'}
         ],
         sortId:{type: mongoose.Schema.Types.ObjectId, ref:'Sort'},
         price:{type:Number},
