@@ -82,6 +82,30 @@ function packageControllers(){
                 res.status(404).json({success: false, message: "", data: datas})
             }
         },
+        //get all bundle,single, coupones, sorts
+        async getDatatables(req,res){
+            try{
+                //get bundle
+                const bundle = await Packageschema.find({packageType:"bundle"})
+                //get single
+                const single = await Packageschema.find({packageType:"single"})
+                //get sort
+                const sort = await Packageschema.find({packageType:"sort"})
+                //get coupone
+                const coupone = await Bonusschema.find({})
+
+                let allData = {
+                    Bundle: bundle,
+                    Single: single,
+                    Sort: sort,
+                    Coupone: coupone
+                }
+                res.status(200).json({success:true,message:"Data fetch done",data:allData})
+            }
+            catch(err){
+                res.status(500).json({success:false,message:"Data fetch done",data:allData})
+            }
+        },
         //get a package info
         async getPackageInfo(req,res){
             try {

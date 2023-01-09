@@ -4,6 +4,10 @@ const uploads = require('../../app/middlewares/uploads')
 const packageControllers = require('../../app/controllers/packageControllers')
 
 
+
+/* A route that is used to get all packages. for table */
+router.get('/packages',packageControllers().getDatatables)
+
 //add new package post
 router.post('/addpackage',packageControllers().addNewPackage)
 
@@ -13,7 +17,7 @@ router.get('/getapackage/:id', packageControllers().getPackageInfo)
 router.post('/editpackage', packageControllers().editPackage)
 router.delete('/deletepackage/:id',packageControllers().deletepackage)
 
-                  ////////////////////////////////*** VAT Routes ****/////////////////////  
+////////////////////////////////*** VAT Routes ****/////////////////////  
 //add or edit vat
 router.post('/addvat', packageControllers().VatController)
 //Get vat info
