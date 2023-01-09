@@ -50,6 +50,64 @@ function blogControllers(){
             catch(err){
                 res.status(404).json({success: false, message:err.message})
             }
+        },
+        //delete a blog
+        async deleteBlog(req,res){
+            try {
+                const deleteData = await BlogSchema.findByIdAndDelete({ _id: req.params.id })
+                deleteData ? res.status(200).json({ success: true, message: "Data deleted" })
+                :
+                res.status(401).json({ success: false, message: "Data can't delete" })
+            }
+            catch (err) {
+                res.status(404).json({ success: false, message: "Data can't delete" })
+            }
+        },
+        //get a blog info
+        async getAblogInfo(req,res){
+            try {
+                const getData = await BlogSchema.find({ _id: req.params.id })
+                getData ? res.status(200).json({ success: true, message: "Blog Found", data: getData })
+                    :
+                    res.status(401).json({ success: false, message: "Blog couldn't Found" })
+            }
+            catch (err) {
+                res.status(404).json({ success: false, message: "Blog couldn't Found" })
+            }
+        },
+        //edit blog
+        async editBlog(req,res){
+            try {
+                if (!req.files) {
+                    let id = req.body._id
+                    let databody = req.body
+                    delete databody._id
+                    let editedData = await BlogSchema.findOneAndUpdate({ "_id": id }, databody)
+                    editedData ? res.status(200).json({ success: true, message: "Edited done data" })
+                    :
+                    res.status(401).json({ success: false, message: "Edited not successful."})
+                }
+                else {
+                    let id = req.body._id
+                    let databody = req.body
+                    delete databody._id
+                   
+                    let imgData =[]
+                    let i = 0
+                    req.files.forEach(e => {
+                        imgData.push(e.filename)
+                    });
+                    let editedData = await BlogSchema.findOneAndUpdate({ "_id": id }, databody)
+                    let imgUpdate = await BlogSchema.findOneAndUpdate({"_id":id},{$push:{images:{$each:imgData}}})
+                    editedData ? res.status(200).json({ success: true, message: "Data updated with image" })
+                    :
+                    res.status(401).json({ success: false, message: "Data update failed" })
+                }
+            }
+            catch (err) {
+                console.log(err);
+                res.status(404).json({ success: false, message: err })
+            }
         }
     }
 }

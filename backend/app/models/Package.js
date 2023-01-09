@@ -17,7 +17,7 @@ const VatSchema = new mongoose.Schema({
 const PackageSchema = new mongoose.Schema({
     name: {type: String, trim: true, required: true},
     packageType:{type:String, enum:['single','sort', 'bundle'], default:'bundle'},
-    packageStatus:{type: Boolean, default: true},
+    packageStatus:{type: String, enum:['active','inactive'], default:'active'},
     bundle:{
         oldPrice: {type: Number, default:0},
         price: {type:Number,required:true, default:0},
@@ -48,8 +48,8 @@ const PackageSchema = new mongoose.Schema({
                 access: {type:Number}
             }]
         }],
-        packageFeature:[{name:{type:String, trim:true}}],
-        uncheckFeature:[{name:{type:String, trim:true}}],
+        packageFeature:[{type:String, trim:true}],
+        uncheckFeature:[{type:String, trim:true}],
         bestSuggestion: {type:String, trim:true},
         note:{type:String, trim:true}
     },
