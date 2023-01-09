@@ -107,7 +107,7 @@ function packageControllers(){
                 res.status(200).json({success:true,message:"Data fetch done",data:allData})
             }
             catch(err){
-                res.status(500).json({success:false,message:"Data fetch done",data:allData})
+                res.status(500).json({success:false,message:"Data Can't fetch"})
             }
         },
         //get a package info
@@ -169,15 +169,16 @@ function packageControllers(){
                 if(lengthFind.length>0){
                     let id = lengthFind[0]._id;
                     const updateData = await Vatschema.findOneAndUpdate({"_id":id},req.body)
-                    updateData ? res.status(200).json({success:true, message:"Updated Done"})
+                    updateData ? res.status(200).json({success:true, message:"Update Done"})
                     :
                     res.status(401).json({success:false, message:"Can't Update"})
                 }
                 else{
-                const vats = await Vatschema.save(req.body);
-                vats ? res.status(200).json({success:false, message:"Updated"})
-                :
-                res.status(401).json({success:false, message:"Can't Update"})
+                    const saveVat = new Vatschema(req.body)
+                    const vats = await saveVat.save();
+                    vats ? res.status(200).json({success:true, message:"Updated"})
+                    :
+                    res.status(401).json({success:false, message:"Can't Update"})
                 }
             }
             catch(err){

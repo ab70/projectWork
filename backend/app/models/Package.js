@@ -11,7 +11,7 @@ const BonusSchema = new mongoose.Schema({
 
 const VatSchema = new mongoose.Schema({
     addVat: {type:Number,default:0, min:0, max:100},
-    status:{type:Boolean,default:false}
+    status:{type:String, enum:['active','inactive'] , default:'inactive'}
 },{timestamps:true})
 
 const PackageSchema = new mongoose.Schema({
