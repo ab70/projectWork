@@ -171,7 +171,8 @@ function packageControllers(){
         //add bonus or coupon
         async bonusCoupone(req,res) {
             try {
-                const saveData = await Bonusschema.save(req.body);
+                const bodyTosave = new Bonusschema(req.body)
+                const saveData = await bodyTosave.save();
                 saveData ? res.status(200).json({success:true, message:"Data saved"}) 
                 : 
                 res.status(401).json({success:false, message: "can't save"})
