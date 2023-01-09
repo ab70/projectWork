@@ -94,11 +94,15 @@ function packageControllers(){
                 //get coupone
                 const coupone = await Bonusschema.find({})
 
+                //vat data
+                const vat = await Vatschema.find({})
+
                 let allData = {
                     Bundle: bundle,
                     Single: single,
                     Sort: sort,
-                    Coupone: coupone
+                    Coupone: coupone,
+                    Vat: vat
                 }
                 res.status(200).json({success:true,message:"Data fetch done",data:allData})
             }
