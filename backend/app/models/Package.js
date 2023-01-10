@@ -32,16 +32,9 @@ const PackageSchema = new mongoose.Schema({
             reach: {type:Number, },
             click:{type: Number,},
         }],
-        bidnOffer:[{
-            subcategories:[{type: mongoose.Schema.Types.ObjectId, ref:'Subcategory',}
-
-            ],
-            reach: {type:Number,},
-            click:{type: Number, },
-        }],
+        
         stickersSort:[{
             subcategories:[{type: mongoose.Schema.Types.ObjectId, ref:'Subcategory',}
-
             ],
             sorts:[{
                 sortId: {type: mongoose.Schema.Types.ObjectId, ref:'Sort',},
@@ -56,18 +49,24 @@ const PackageSchema = new mongoose.Schema({
     single:{
         subcategories:[{type: mongoose.Schema.Types.ObjectId, ref:'Subcategory',}
         ],
-        price:{type:Number},
-        reach: {type:Number,},
-        click:{type: Number, },
-        minAmount: {type:Number, },
+        promote:{
+            price:{type:Number},
+            reach: {type:Number,},
+            click:{type: Number,},
+            minAmount: {type:Number,},
+        },
+        traffic:{
+            price:{type:Number},
+            reach:{type:Number},
+            click:{type:Number},
+            minAmount:{type:Number}
+        } 
     },
     sort:{
         subcategories:[{type: mongoose.Schema.Types.ObjectId, ref:'Subcategory'}
         ],
-        sortId:{type: mongoose.Schema.Types.ObjectId, ref:'Sort'},
+        sortId:{type:mongoose.Schema.Types.ObjectId, ref:'Sort'},
         price:{type:Number},
-        reach: {type:Number,},
-        click:{type: Number, },
     },
     packageOrder:{type: Number, default:0}
 },{timestamps:true})
