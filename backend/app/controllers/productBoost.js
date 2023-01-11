@@ -9,11 +9,11 @@ function productBoost(){
                 let datas = await Packageschema.findOne({"single.subcategories":req.params.id})
                 datas ? res.status(200).json({success:true,message:"Found",data:datas})
                 :
-                res.status(401).json({success:false,message:"can'tt find"})
+                res.status(401).json({success:false,message:"can't find"})
 
             }
             catch(err){
-                res.status(500).json({success:false,message:"can'tt find"})
+                res.status(500).json({success:false,message:"can't find"})
             }
         }
     }
