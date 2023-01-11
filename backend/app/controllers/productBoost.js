@@ -18,3 +18,5 @@ function productBoost(){
         }
     }
 }
+
+module.exports = productBoost
