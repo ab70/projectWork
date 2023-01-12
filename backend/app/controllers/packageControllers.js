@@ -86,11 +86,11 @@ function packageControllers(){
         async getDatatables(req,res){
             try{
                 //get bundle
-                const bundle = await Packageschema.find({packageType:"bundle"})
+                const bundle = await Packageschema.find({packageType:"bundle"}).populate("bundle.post.subcategories bundle.stickersSort.subcategories")
                 //get single
-                const single = await Packageschema.find({packageType:"single"})
+                const single = await Packageschema.find({packageType:"single"}).populate("single.subcategories")
                 //get sort
-                const sort = await Packageschema.find({packageType:"sort"})
+                const sort = await Packageschema.find({packageType:"sort"}).populate("sort.subcategories")
                 //get coupone
                 const coupone = await Bonusschema.find({})
 
