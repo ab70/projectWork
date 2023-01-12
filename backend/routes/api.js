@@ -3,7 +3,7 @@ const authRoute = require('./authRoute/authRoute')
 const packageRoute = require('./productRoute/packageRoute')
 const productRoute = require('./productRoute/productRoute')
 const blogRoute = require('./blogRoute/blogRoute')
-const productBoostRoute = require('./productBoostRoute')
+const productBoostRoute = require('./productBoostRoute/productBoostRoute')
 const testRoute = require('./testRoute/testRoute')
 
 
