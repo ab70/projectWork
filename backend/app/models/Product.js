@@ -17,7 +17,6 @@ const ProductSchema = new mongoose.Schema({
     notificationDialogue: {type:String, trim: true, default:''},
     productImgs :[ {img: {type: String, trim:true}, approved:{type: Boolean, default: false}, longImg:{type: Boolean,  default: false }}],
     imageChanged:{type:Boolean, default:true},
-    //packageId:{type: mongoose.Schema.Types.ObjectId, ref:'Package', default:''},
     boosted:{type:Boolean, default:false},
     publishedAt:{type:Date, default: moment().format('LL')},
     total: {
