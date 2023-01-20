@@ -12,9 +12,9 @@
                     chatusers:[from,to],
                     sender:from
                 })
-                saveMessage ? res.status(200).json({success:true,message:"Message delivired"})
+                saveMessage ? res.status(200).json({success:true,message:"Message delivered"})
                 :
-                res.status(401).json({success:false,message:"Can't delivver message"})
+                res.status(401).json({success:false,message:"Can't deliver message"})
             }
             catch(err){
                 res.status(500).json({success:false,message:"Inernal server error"})
