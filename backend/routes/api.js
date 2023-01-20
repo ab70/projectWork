@@ -6,7 +6,7 @@ const blogRoute = require('./blogRoute/blogRoute')
 const productBoostRoute = require('./productBoostRoute/productBoostRoute')
 const countRoute = require('./countRoute/countRoute')
 const testRoute = require('./testRoute/testRoute')
-
+const chatRoute = require('./chatRoute/chatRoute')
 
 function initRoutes(app){
     app.use('/api/auth', authRoute)
@@ -15,6 +15,7 @@ function initRoutes(app){
     app.use('/api/package', packageRoute)
     app.use('/api/productboost',productBoostRoute)
     app.use('/api/count',countRoute)
+    app.use('/api/chat',chatRoute)
     app.use('/api/blog', blogRoute)
     app.use('/api/test', testRoute)
 }
