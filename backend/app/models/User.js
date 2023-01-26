@@ -11,7 +11,7 @@ const UserSchema = new mongoose.Schema({
     dateOfBirth:{type:Date,},
     education:{type:String, trim:true, default:''},
     currentJob:{type:String,trim:true,default:''},
-    gender:{type:String,trim:true,enum:['male','female'],default:''},
+    gender:{type:String,trim:true,enum:['male','female'],default:'male'},
     note:{type:String,trim:true},
     isOtpAuthenticated: { type: Boolean, default: false },
     otp:{ type: Number, default: 0,},

@@ -42,7 +42,7 @@ function authControllers(){
             }
             catch(err){
                 console.log(err);
-                res.status(404).json({message: "User Already Exist! Try to login again"})
+                res.status(404).json({message: "err"})
 
             }
 
