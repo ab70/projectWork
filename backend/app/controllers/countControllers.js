@@ -29,7 +29,21 @@ function countControllers(){
                 res.status(500).json({success:false,message:err.message})
             }
         },
-        //add 
+        //Update count of all products that was served / reach count
+        async addReachCount(req,res){
+            try{
+                const bodyData = req.body.products
+                const reachCount = await ProductSchema.updateMany({_id: {$in:bodyData}},{$inc:{"total.reach":1,"paid.reach":1}},{multi:true})
+                reachCount ? res.status(200).json({success:true,message: "Reach served"})
+                :
+                res.status(404).json({success:false,message: "Reach no served"});
+
+            }
+            catch(err){
+                console.log(err.message);
+                res.status(500).json({success:false,message:err.message});
+            }
+        } 
     }
 }
 
